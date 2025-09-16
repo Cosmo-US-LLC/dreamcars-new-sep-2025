@@ -4,6 +4,8 @@ import Loinp from "../../assects/images/dtokens.png";
 import eth from "../../assects/svgs/ethsv.svg";
 import USDT from "../../assects/images/USDT.png";
 import BNB from "../../assects/images/loinppre (2).png";
+import Sol from "../../assects/images/tokens_11.svg";
+import USDC from "../../assects/images/tokens (9).svg";
 import downarw from "../../assects/svgs/droparw.svg";
 import downeth from "../../assects/svgs/dropeth.svg";
 import Solid from "../../assects/images/logo-white-3.png.png";
@@ -88,9 +90,11 @@ const cardData = [
 
 
 const options = [
-    { id: 1, label: "ETH", image: eth },
-    { id: 2, label: "USDT", image: downeth },
-    { id: 3, label: "  BNB", image: BNB }
+{ id: 1, label: "ETH", image: eth },
+  { id: 2, label: "USDT", image: downeth },
+  { id: 3, label: "BNB", image: BNB },
+  { id: 4, label: "SOL", image: Sol },
+  { id: 5, label: "USDC", image: USDC },
 ];
 const usdtAbi = [
   {
@@ -126,17 +130,27 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
 
     const [activeButton, setActiveButton] = useState(null);
 
-    const buttons = [
-        { id: 1, label: 'ETH', imgSrc: eth },
-        { id: 2, label: 'USDT', imgSrc: USDT },
-        { id: 3, label: 'BNB', imgSrc: BNB }
-    ];
+   const buttons = [
+    { id: 1, label: "ETH", imgSrc: eth },
+    { id: 2, label: "USDT", imgSrc: USDT },
+    { id: 3, label: "BNB", imgSrc: BNB },
+    { id: 4, label: "SOL", imgSrc: Sol },
+    { id: 5, label: "USDC", imgSrc: USDC },
+    { id: 6, label: "MORE" },
+  ];
 
-    const handleClickButton = (id) => {
-        handleTokenChange(id)
-        setActiveButton(id);
-        setSelectedOption(options[id - 1]);
-    };
+   const handleClickButton = (id) => {
+  handleTokenChange(id);
+  setActiveButton(id);
+
+  const selected = options[id - 1];
+  if (selected) {
+    setSelectedOption(selected);
+  } else {
+    console.log("No option found for this button");
+    // maybe open a modal, show more tokens, etc.
+  }
+};
 
     const handleButtonClick = () => {
         setShowDropdown(!showDropdown);
@@ -1006,10 +1020,10 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
                       <h5 className="font-[Lato] text-center text-[16px] xs:text-[16px] font-[500] text-white">
                       {totalParticipants ? totalParticipants : "1861"} {t("Contributions")}
                       </h5>
-                      <div></div>
-                      <h5 className="font-[Lato] text-center text-[15px] xs:text-[14px]  font-[500] space-x-1 text-[#929292]">
+                     
+                      {/* <h5 className="font-[Lato] text-center text-[15px] xs:text-[14px]  font-[500] space-x-1 text-[#929292]">
                       Launching Price = $0.03
-                      </h5>
+                      </h5> */}
                     </div>
                   </div>
                   <div className="bg-[#3F3F3F] rounded-b-[10px] px-[50px] pt-4 pb-[30px] xs:pb-5 sm:pb-5 md:pb-8  xs:px-[15px] sm:px-14 md:px-10 ">
@@ -1028,13 +1042,40 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
                   }
                       <div className="flex backdrop-blur-md bg-[#ffffff40] border-r border-t rounded-[60px]  w-[100%] mx-auto py-[5px]  items-center justify-center">
                         <p className="text-[16px] text-[#fff] text-center font-[700]">
-                        Current Price = $0.013{" "}
+                        Presale Price = $0.013 <span className="text-[20px] leading-[100%]">|</span> Launch Price = $0.03
                             {/* <span className="text-[#19D548] font-[700]">
                               (+500%)
                             </span> */}
                         </p>
                       </div>
-                      <div className="2xl:flex justify-between xl:flex lg:flex md:flex flex sm:flex 2xl:space-x-[11px] xl:space-x-[11px] lg:space-x-[11px] md:space-x-[11px] sm:space-x-0 space-x-1">
+                       <div className="grid grid-cols-3 gap-3">
+                        {buttons.map((button) => (
+                          <button
+                            key={button.id}
+                            onClick={() => handleClickButton(button.id)}
+                            className={`flex items-center xs:h-[40px] sm:h-[40px] h-[48px] w-[100%] justify-center  xs:text-[14px] rounded-[14px] xs:py-1 py-[8px] backdrop-blur transition-all duration-300 ${
+                              activeButton === button.id
+                                ? "bg-white text-black shadow-inner"
+                                : "bg-[#ffffff17] text-white"
+                            }`}
+                          >
+                            <div className="flex flex-col items-center justify-center">
+                              {
+                                 button.imgSrc &&
+                                 <img
+                                src={button.imgSrc}
+                                className="h-[17px]"
+                                alt={button.label}
+                              />
+                              }
+                              <p className="text-[14px] xs:text-[10px] font-[Lato] font-[400] mt-[2px] w-[30px]">
+                                {button.label}
+                              </p>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                      {/* <div className="2xl:flex justify-between xl:flex lg:flex md:flex flex sm:flex 2xl:space-x-[11px] xl:space-x-[11px] lg:space-x-[11px] md:space-x-[11px] sm:space-x-0 space-x-1">
                         {buttons.map((button) => (
                           <button
                             key={button.id}
@@ -1057,7 +1098,7 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
                             </div>
                           </button>
                         ))}
-                      </div>
+                      </div> */}
                       <div className="flex relative z-[9]">
                         <div className="w-[100%] space-y-[5px]">
                           <label
@@ -1080,11 +1121,14 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
                                 className="h-[44px] flex text-[#fff] text-[12px] font-[400] items-center justify-between p-[7px] !pr-[10px] 2xl:w-[130px] xl:w-[130px] lg:w-[130px] md:w-[130px] sm:w-[130px] w-[105px] h-[42px] border rounded-r-[6px] bg-[#D1D5DB]"
                               >
                                 <div className="flex items-center space-x-[8px]">
-                                  <img
+                                  {
+                                      selectedOption.image &&
+                                    <img
                                     src={selectedOption.image}
                                     alt={selectedOption.label}
                                     className="max-h-[25px] min-h-[22px]"
                                   />
+                                  }
                                   <span className="text-[#000] leading-[100%] text-[14px] xs:text-[10px] font-[700] pt-1 xs:pt-0">
                                     <span>{selectedOption.label}</span>
                                   </span>
@@ -1097,18 +1141,21 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
                               </button>
                               {showDropdown && (
                                 <div className="absolute right-0 mt-2 w-[130px] backdrop-blur-md bg-[#646464e6] rounded-[12px] shadow-lg">
-                                  {options.map((option) => (
+                                   {options.map((option) => (
                                     <div
                                       key={option.id}
                                       onClick={() => handleOptionClick(option)}
                                       className="cursor-pointer flex  items-center p-[7px] space-x-[8px] hover:bg-[#737373] rounded-[5px]"
                                     >
                                       <div className="flex items-center justify-center min-w-[32px]">
-                                        <img
+                                        {
+                                          option.image &&
+                                          <img
                                           src={option.image}
                                           alt={option.label}
                                           className="max-h-[30px] min-h-[29px]"
                                         />
+                                        }
                                       </div>
                                       <span className="text-[#fff] text-[14px] font-[500]">
                                         {option.label}
