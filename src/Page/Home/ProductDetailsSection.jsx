@@ -982,7 +982,7 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
                         >
                           <img
                             src={Iicon}
-                            alt=""
+                            alt="" 
                             style={{ marginBottom: "-8px", width: "20px" }}
                           />
                         </button>
