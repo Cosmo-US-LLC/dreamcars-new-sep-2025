@@ -56,6 +56,9 @@ const Home = ({handleClose, range, handleRange}) => {
       <div id="home" className="">
         <ProductDetaliSection  handleRange={handleRange} range={range} handleClose={handleClose} setPerc={setPerc} setParticipants={setParticipants}/>
       </div>
+        <div>
+        <FeaturedSection />
+      </div>
       {/* <div>
         <MultipleSec />
       </div>
@@ -71,9 +74,7 @@ const Home = ({handleClose, range, handleRange}) => {
       <div>
         <BetaSection />
       </div>
-      <div>
-        <FeaturedSection />
-      </div>
+    
       {/* <div>
         <LicensedCardSection />
       </div> */}
@@ -89,9 +90,9 @@ const Home = ({handleClose, range, handleRange}) => {
       <div>
         <RewardSection  handleRange={handleRange} range={range}/>
       </div>
-      <div>
-        <SomeQuestions />
-      </div>
+      {/* <div>
+       <SomeQuestions />
+      </div> */}
       <div>
         <BuySection />
       </div>

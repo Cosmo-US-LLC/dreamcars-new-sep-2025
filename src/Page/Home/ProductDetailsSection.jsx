@@ -22,6 +22,15 @@ import worldRealyLogo from "../../assects/svgs/world-realy-logo.svg";
 import DCtext from "../../assects/svgs/dreamsCars.svg";
 import officalMan from "../../assects/svgs/offical-man.svg";
 import officalMan2 from "../../assects/images/offical-man2.png";
+import token1 from "../../assects/icons/wallet_icon/token (9).svg";
+import token2 from "../../assects/icons/wallet_icon/token (8).svg";
+import token3 from "../../assects/icons/wallet_icon/token (7).svg";
+import token4 from "../../assects/icons/wallet_icon/token (6).svg";
+import token5 from "../../assects/icons/wallet_icon/token (5).svg";
+import token6 from "../../assects/icons/wallet_icon/token (4).svg";
+import token7 from "../../assects/icons/wallet_icon/token (3).svg";
+import token8 from "../../assects/icons/wallet_icon/token (2).svg";
+import token9 from "../../assects/icons/wallet_icon/token (1).svg";
 
 import Parse from 'parse';
 import '@rainbow-me/rainbowkit/styles.css';
@@ -58,32 +67,33 @@ import { Navigation, Mousewheel,Pagination, Keyboard } from "swiper/modules";
 
 import cardsvg1 from "../../assects/svgs/cardsvg (1).svg";
 import cardsvg2 from "../../assects/svgs/cardsvg (2).svg";
+import TokenSelectDropdown from "../../components/TokenDropdown";
 
 const cardData = [
   {
     id: 1,
     title: "Best New Crypto",
     titleWidth: "max-w-[155px] min-w-[155px]",
-    para:"By Coinrise, 2024"
+    para:"By Coinrise, 2025"
   },
   {
     id: 2,
     title: "Best Crypto  Pre-Sale ",
     titleWidth: "max-w-[183px] min-w-[140px]",
-    para:"By Coinrise, 2024"
+    para:"By Coinrise, 2025"
   },
   {
     id: 3,
     title: "Best Crypto Innovation",
     titleWidth: "max-w-[155px] min-w-[150px]",
-    para:"Altcoin Daily, 2024"
+    para:"Altcoin Daily, 2025"
 
   },
   {
     id: 4,
     title: "Best Crypto Growth Potential",
     titleWidth: "max-w-[223px] min-w-[145px]",
-    para:"Altcoin Daily, 2024"
+    para:"Altcoin Daily, 2025"
 
   },
 ];
@@ -129,6 +139,7 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
     const { t, i18n } = useTranslation();
 
     const [activeButton, setActiveButton] = useState(null);
+    const [selectedToken, setSelectedToken] = useState(null);
 
    const buttons = [
     { id: 1, label: "ETH", imgSrc: eth },
@@ -138,6 +149,31 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
     { id: 5, label: "USDC", imgSrc: USDC },
     { id: 6, label: "MORE" },
   ];
+  const tokenSelect = [
+  [
+    { id: 1, symbol: "ETH", sub_symbol: "ERC-20", icon: eth },
+    { id: 2, symbol: "USDT", sub_symbol: "ERC-20", icon: USDT },
+  ],
+  [
+    { id: 3, symbol: "USDT", sub_symbol: "ERC-20", icon: USDT },
+    { id: 4, symbol: "SOL", sub_symbol: "SOLANA", icon: Sol },
+  ],
+  [
+    { id: 5, symbol: "BNB", sub_symbol: "BSC-20", icon: BNB },
+    { id: 6, symbol: "USDC", sub_symbol: "BITCOIN", icon: USDC },
+  ],
+  [
+    { id: 7, symbol: "SOL", icon: Sol },
+    { id: 8, symbol: "ETH", icon: eth },
+  ],
+  [
+    { id: 9, symbol: "USDC", sub_symbol: "ERC-20", icon: USDC },
+    { id: 10, symbol: "BNB", sub_symbol: "ERC-20", icon: BNB },
+  ],
+  [{ id: 11, symbol: "More" },
+    
+  ],
+];
 
    const handleClickButton = (id) => {
   handleTokenChange(id);
@@ -159,7 +195,6 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
     const handleOptionClick = (option) => {
         setSelectedOption(option);
         handleTokenChange(option.id)
-        handleClickButton(option.id)
         setShowDropdown(false);
     };
 
@@ -684,22 +719,54 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
                         </div>
                     </div>
                     
-                    <div className="px-[23px] xs:px-[8px] py-[13px] relative z-[9] gradient-border-mask-own-hero-cent backdrop-blur-md bg-[#ffffff08] xs:space-x-2 flex justify-between max-w-[705px] mx-auto items-center">
-                        <h4 className="2xl:text-[20px] xl:text-[20px] lg:text-[20px] md:text-[20px] sm:text-[20px] text-[12px] font-[800] text-[#fff] ml-3">$DCARS Pre-Sale is Live <span className="xs:hidden">Now</span></h4>
+                    <div className="px-[23px] xs:px-[8px] py-[13px] relative z-[9] gradient-border-mask-own-hero-cent backdrop-blur-md bg-[#ffffff08] xs:space-x-2 flex justify-center max-w-[1260px] mx-auto items-center">
+                       <div className="flex 2xl:flex-row xl:flex-row 2xl:space-y-0 xl:space-y-0 lg:space-y-0 md:space-y-0 sm:space-y-4 space-y-4 lg:flex-row md:flex-row sm:flex-col flex-col justify-between max-w-[1120px] w-[100%] mx-auto items-center">
+                         <h4 className="2xl:text-[20px] xl:text-[20px] lg:text-[20px] md:text-[20px] sm:text-[20px] text-[12px] font-[800] text-[#fff] ml-3">$DCARS Pre-Sale is Live <span className="xs:hidden">Now</span></h4>
                         <div className="flex justify-center space-x-[10px] xs:space-x-[4px] ">
-                            <div className="w-[58px] h-[41px] xs:w-[35px] xs:h-[29px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
-                                <img className="w-[22px] h-[22px]  xs:w-[20px] xs:h-[20px]" src={eth} alt="" />
+                            <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
+                                <img className="w-[22px] h-[22px]  xs:h-[20px] xs:h-[20px]" src={token1} alt="" />
                             </div>
-                            <div className="w-[58px] h-[41px] xs:w-[35px] xs:h-[29px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
-                                <img className="w-[22px] h-[22px]  xs:w-[20px] xs:h-[20px]" src={USDT} alt="" />
+                            <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
+                                <img className="w-[22px] h-[22px]  xs:h-[20px] xs:h-[20px]" src={token2} alt="" />
                             </div>
-                            <div className="w-[58px] h-[41px] xs:w-[35px] xs:h-[29px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
-                                <div className="w-[22px] h-[22px]  xs:w-[20px] xs:h-[20px] p-[4px] bg-[#212121] rounded-full flex items-center justify-center">
-                                    <img src={BNB} alt="" />
+                            <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
+                                <div className="w-[22px] h-[22px]  xs:h-[20px] xs:h-[20px]">
+                                    <img src={token3} alt="" />
+                                </div>
+                            </div>
+                              <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
+                                <div className="w-[22px] h-[22px]  xs:w-[20px] xs:h-[20px]">
+                                    <img src={token4} alt="" />
+                                </div>
+                            </div>
+                              <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
+                                <div className="w-[22px] h-[22px]  xs:w-[20px] xs:h-[20px]">
+                                    <img src={token5} alt="" />
+                                </div>
+                            </div>
+                              <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
+                                <div className="w-[22px] h-[22px]  xs:w-[20px] xs:h-[20px]">
+                                    <img src={token6} alt="" />
+                                </div>
+                            </div>
+                              <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
+                                <div className="w-[22px] h-[22px]  xs:w-[20px] xs:h-[20px]">
+                                    <img src={token7} alt="" />
+                                </div>
+                            </div>
+                              <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
+                                <div className="w-[22px] h-[22px]  xs:w-[20px] xs:h-[20px]">
+                                    <img src={token8} alt="" />
+                                </div>
+                            </div>
+                              <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
+                                <div className="w-[22px] h-[22px]  xs:w-[20px] xs:h-[20px]">
+                                    <img src={token9} alt="" />
                                 </div>
                             </div>
                         </div>
                         <button className="text-[16px] xs:text-[10px] ftbutton2  font-[700] text-[#000] w-[158px] xs:w-[70px] h-[41px] xs:h-[24px] bgherobtn xs:!rounded-[7px] border-[transparent] border hover:bg-[transparent] hover:text-[#FFD02F] hover:border hover:border-[#FFD02F] "><a href="#buynow" data-offset="60">Buy Now </a></button>
+                       </div>
                     </div>
                     
                     <div className="2xl:hidden xl:hidden lg:hidden !mt-[20px] md:hidden sm:flex flex space-x-3">
@@ -730,7 +797,7 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
     <div
       className=" pt-[1rem]  xs:pb-[0rem] xs:pt-[2rem]"
     >
-      <div className=" space-y-4  2xl:w-[100%] xl:w-[100%] lg:w-[100%] md:w-[100%] sm:w-[100%] w-[90%] max-w-[1276px] mx-auto ">
+      <div className=" space-y-4  2xl:w-[100%] xl:w-[100%] lg:w-[100%] md:w-[100%] sm:w-[100%] w-[100%] max-w-[1276px] mx-auto ">
         <div className="2xl:space-y-[45px]  xl:space-y-[45px] lg:space-y-4 xs:space-y-8 sm:space-y-3 md:space-y-3 lg:block xs:block md:block sm:block">
           <div className="">
             <h3 className="text-[46px] xs:text-[28px] xs:leading-[117%] text-center font-[700] text-[#fff]">
@@ -851,7 +918,7 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
     <div className="relative w-full h-auto">
       {isMobile ? (
        <div className="">
-       <div className="flex flex-col items-center px-4 backdrop-blur-md bg-[#d1d5db1f] rounded-[30px] gradient-border-mask w-[90%] max-w-[1276px] mx-auto">
+       <div className="flex flex-col items-center px-4 backdrop-blur-md bg-[#d1d5db1f] rounded-[30px] gradient-border-mask w-[100%] max-w-[1276px] mx-auto">
           {/* <img
             src={DCBG}
             alt="Mobile Banner"
@@ -860,7 +927,7 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
           <div className="relative z-10 flex flex-col items-center gap-2 mt-8 pb-8">
           <img src={DCtext} alt="dc text" className="flex w-[186.78px] h-[23.72px] justify-center items-center " />
             <p className="text-white text-center font-lato text-[26px] font-[700] leading-[30px] capitalize">
-                is the official Sponsor Of
+                the official Sponsor Of
             </p>
             <div className="px-1 py-1 mt-6 relative w-full  max-w-[100%] h-[86px] bg-[rgba(0,27,78,0.66)] backdrop-blur-md border border-white rounded-md flex justify-end items-start">
               <img
@@ -924,15 +991,16 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
               Winner Of Several European Rally Championship Events
               </p>
             <div className=" z-[99] pt-[20px] flex items-start  ">
-            <div className="mr-5">
+          
+            <div className="flex  text-[25px] font-lato font-[800]  justify-end items-center text-[#fff]">
+            Last Race, 11 Jan, 2025
+            </div>
+              <div className="ml-5">
             <img
               src={worldRealyLogo}
               alt="dc text"
               className="w-[120.209px] flex-shrink-0 left-[3%]   z-[9]"
             />
-            </div>
-            <div className="flex  text-[25px] font-lato font-[800]  justify-end items-center text-[#fff]">
-            Last Race, 11 Jan, 2025
             </div>
           </div>
             </div>
@@ -949,7 +1017,7 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
     </div>
     <div
     >
-      <div id="buynow" className=" space-y-4  2xl:w-[100%] xl:w-[100%] lg:w-[100%] md:w-[100%] sm:w-[100%] w-[90%] max-w-[1276px] mx-auto ">
+      <div id="buynow" className=" space-y-4  2xl:w-[100%] xl:w-[100%] lg:w-[100%] md:w-[100%] sm:w-[100%] w-[100%] max-w-[1276px] mx-auto ">
         <div className="2xl:space-y-[45px]  xl:space-y-[45px] lg:space-y-4 xs:space-y-3 sm:space-y-3 md:space-y-3 lg:block xs:block md:block sm:block">
          
           <div className="w-[100%] xl:w-[100%] mt-[50px] lg:w-[100%] lg:mx-auto flex flex-col justify-end  xs:w-[100%] sm:w-[100%] md:w-[100%] z-[2]">
@@ -1040,15 +1108,26 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
                       </div>
                       : ""
                   }
-                      <div className="flex backdrop-blur-md bg-[#ffffff40] border-r border-t rounded-[60px]  w-[100%] mx-auto py-[5px]  items-center justify-center">
-                        <p className="text-[16px] text-[#fff] text-center font-[700]">
-                        Presale Price = $0.013 <span className="text-[20px] leading-[100%]">|</span> Launch Price = $0.03
+                      <div className="flex backdrop-blur-md bg-[#ffffff40] border-r border-t rounded-[60px]  w-[100%] mx-auto  pb-[10px] pt-[8px] items-center justify-center">
+                        <p className="2xl:text-[16px] xl:text-[16px] lg:text-[16px] md:text-[16px] sm:text-[14px] text-[12px] leading-[100%] text-[#fff] text-center font-[700]">
+                        Presale Price = <span className="text-[#0c2f71]">$0.013 </span> <span className="2xl:text-[20px] xl:text-[20px] lg:text-[20px] md:text-[20px] sm:text-[16px] text-[16px] leading-[70%]">|</span> Launch Price = <span className="text-[#0c2f71]">$0.03</span> 
                             {/* <span className="text-[#19D548] font-[700]">
                               (+500%)
                             </span> */}
                         </p>
                       </div>
-                       <div className="grid grid-cols-3 gap-3">
+                       <div className="grid grid-cols-3 gap-2 md:grid-cols-5">
+                  {tokenSelect.map((data, index) => (
+                    <TokenSelectDropdown
+                      key={index}
+                      tokens={data}
+                      onChange={(token) =>
+                        console.log(`Dropdown ${index + 1}:`, token)
+                      }
+                    />
+                  ))}
+                </div>
+                       {/* <div className="grid grid-cols-3 gap-3">
                         {buttons.map((button) => (
                           <button
                             key={button.id}
@@ -1074,7 +1153,7 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
                             </div>
                           </button>
                         ))}
-                      </div>
+                      </div> */}
                       {/* <div className="2xl:flex justify-between xl:flex lg:flex md:flex flex sm:flex 2xl:space-x-[11px] xl:space-x-[11px] lg:space-x-[11px] md:space-x-[11px] sm:space-x-0 space-x-1">
                         {buttons.map((button) => (
                           <button
@@ -1370,7 +1449,7 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
           Share Dreamcars with Friends
           </h4>
           <div className="flex justify-end space-x-[10px] xs:space-x-[5px] ">
-            <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] relative z-[9] flex justify-center items-center gradient-border-mask-no-blur hidden xs:flex">
+            <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] relative z-[9] flex justify-center items-center gradient-border-mask-no-blur-button overflow-hidden hidden xs:flex">
               <a
                 href="#"
                 target=""
@@ -1384,7 +1463,7 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
                 <img src={sharelogo} className="h-[22px] xs:h-[18px] w-[22px] xs:w-[18px] text-white cursor-pointer" />
               </a>
             </div>
-            <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] relative z-[9] flex justify-center items-center gradient-border-mask-no-blur">
+            <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] relative z-[9] flex justify-center items-center overflow-hidden gradient-border-mask-no-blur-button">
               <a
                 href="#"
                 target=""
@@ -1398,7 +1477,7 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
                 <FaLink className="h-[22px] xs:h-[15px] w-[22px] xs:w-[20px] text-white cursor-pointer" />
               </a>
             </div>
-            <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] flex justify-center items-center gradient-border-mask-no-blur">
+            <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] flex justify-center items-center gradient-border-mask-no-blur-button overflow-hidden">
               <a
                 href="https://twitter.com/dreamcars_bsc"
                 target="_blank"
@@ -1408,7 +1487,7 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
                 <FaTwitter className="h-[22px] xs:h-[15px] w-[22px] xs:w-[20px] text-white cursor-pointer" />
               </a>
             </div>
-            <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] flex justify-center items-center gradient-border-mask-no-blur">
+            <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] flex justify-center items-center gradient-border-mask-no-blur-button overflow-hidden">
               <a
                 href="https://t.me/Dreamcars_bsc"
                 target="_blank"
@@ -1419,7 +1498,7 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
               </a>
             </div>
 
-            <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] flex justify-center items-center gradient-border-mask-no-blur">
+            <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] flex justify-center items-center gradient-border-mask-no-blur-button">
               <a
                 href="https://www.instagram.com/dreamcars_bsc/"
                 className="relative z-[20] cursor-pointer"

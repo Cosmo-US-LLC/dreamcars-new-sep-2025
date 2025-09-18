@@ -307,7 +307,7 @@ const RewardSection = ({ range, handleRange }) => {
                 <h3 className="2xl:text-[32px] xl:text-[32px] lg:text-[32px] md:text-[32px] sm:text-[26px] text-[26px] max-w-[400px] w-[100%] xs:text-[30px] xs:leading-[33px] font-[700]  leading-[40px] pb-6 text-[#fff]">
                   {t("RewardSection.title")}<span className=" font-[600]">$1000</span>
                 </h3>
-                <p className="text-[18px] xs:text-[18px] 2xl:max-w-[445px] xl:max-w-[445px] lg:max-w-[445px] md:max-w-[445px] sm:max-w-[100%] max-w-[100%]  font-[400]  text-white" dangerouslySetInnerHTML={{ __html: t('RewardSection.para') }}>
+                <p className="text-[18px] xs:text-[18px] 2xl:max-w-[418px] xl:max-w-[418px] lg:max-w-[418px] md:max-w-[418px] sm:max-w-[100%] max-w-[100%]  font-[400]  text-white" dangerouslySetInnerHTML={{ __html: t('RewardSection.para') }}>
                 </p>
               </div>
               <div className="space-y-4 ">
