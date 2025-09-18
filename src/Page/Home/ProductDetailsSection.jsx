@@ -973,7 +973,7 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
               className="flex w-[623.854px] h-[45px] justify-center items-center mt-8"
             />
             <p className="text-white text-center font-lato text-[43.754px] font-semibold leading-[57.225px] capitalize">
-              is the official Sponsor Of
+              the official Sponsor Of
             </p>
             <div className="px-10 py-6 mt-10 relative w-[1070.188px] h-[264.905px] flex-shrink-0 rounded-[31.248px] border-[0.897px] border-white bg-[rgba(0,27,78,0.66)] backdrop-blur-[14.414px] flex flex-col items-end">
               <div className="overflow-hidden">
@@ -1094,7 +1094,7 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
                       </h5> */}
                     </div>
                   </div>
-                  <div className="bg-[#3F3F3F] rounded-b-[10px] px-[50px] pt-4 pb-[30px] xs:pb-5 sm:pb-5 md:pb-8  xs:px-[15px] sm:px-14 md:px-10 ">
+                  <div className="bg-[#3F3F3F] rounded-b-[10px] px-[50px] pt-2 pb-[30px] xs:pb-5 sm:pb-5 md:pb-8  xs:px-[15px] sm:px-14 md:px-10 ">
                     <div className="flex justify-between"></div>
                     <div className="py-1 space-y-3 xs:space-y-3">
                       
