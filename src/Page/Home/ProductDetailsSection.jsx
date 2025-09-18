@@ -929,11 +929,11 @@ const ProductDetailsSection = ({ range, handleRange, handleClose, setPerc, setPa
             <p className="text-white text-center font-lato text-[26px] font-[700] leading-[30px] capitalize">
                 the official Sponsor Of
             </p>
-            <div className="px-1 py-1 mt-6 relative w-full  max-w-[100%] h-[86px] bg-[rgba(0,27,78,0.66)] backdrop-blur-md border border-white rounded-md flex justify-end items-start">
+            <div className="px-1 py-1 mt-6 relative w-full  max-w-[100%] h-[86px] bg-[rgba(0,27,78,0.66)] backdrop-blur-md border overflow-hidden border-white rounded-md flex justify-end items-start">
               <img
                 src={officalMan2}
                 alt="dc text"
-                className="max-w-[100px] h-auto absolute top-[-7px] left-0"
+                className="max-w-[94px] h-auto absolute top-[-2px] left-[-23px]"
               />
               <div className="flex flex-col items-start justify-start">
                 <p className="text-white text-center font-lato text-[26px] font-black leading-[25px] uppercase">
