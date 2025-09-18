@@ -9,7 +9,7 @@ const BuySection = () => {
 
   return (
     <div className="howbuygrbg" id="how-to-buy">
-      <div className="max-w-[1255px] 2xl:w-[100%] xl:w-[100%] lg:w-[90%] md:w-[90%] sm:w-[90%] w-[90%] mx-auto space-y-[2rem] xs:space-y-[1rem] pb-[65px] mx-auto">
+      <div className="max-w-[1255px] 2xl:w-[100%] xl:w-[100%] lg:w-[90%] md:w-[90%] sm:w-[90%] w-[90%] mx-auto space-y-[2rem] xs:space-y-[1rem] pb-[65px] pt-[50px] mx-auto">
         {/* <p style={{ top: "-100px", position: "relative" }} id="howItWork"></p> */}
         <h2 className="text-[46px] xs:text-[26px]   text-center font-[700] text-[#fff]  leading-[40px]">
           {t("BuySection.title")}

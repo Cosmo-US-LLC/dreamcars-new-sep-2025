@@ -152,6 +152,24 @@ backdrop-filter: blur(11.649999618530273px);
   mask-composite: exclude;
   overflow: hidden;
 }
+.gradient-border-mask-no-blur-button{
+  position: relative;
+  -webkit-backdrop-filter: blur(0px) !important;
+  backdrop-filter: blur(0px);
+  background: transparent !important;
+  border-radius: 20px !important;
+}
+.gradient-border-mask-no-blur-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  border: 1.5px solid transparent;
+  background: linear-gradient(80deg, rgba(95, 95, 95, 0.164), rgba(117, 117, 117, 0.863), #ffffff52, #ffffff57, #ffffff6e, #ffffffd7) border-box;
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  overflow: hidden;
+}
 .gradient-border-mask-share {
   position: relative;
   backdrop-filter: blur(10px);
@@ -263,7 +281,7 @@ background: rgba(252, 255, 111, 0.11);
   background: linear-gradient(180deg, #1E1E1E 0.01%, #043798 81.87%);
 }
 .featbggr{
-  background: linear-gradient(180deg, #043798 27.34%, #000 107.78%);
+  background: linear-gradient(360deg, #043798 27.34%, #000 107.78%);
 }
 .shadowcard{
   box-shadow: inset 8px 8px 8px 8px rgb(0 0 0 / 0.05);
