@@ -1,24 +1,47 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
+import { tokenImageMap } from "../presale-gg/assets/img/tokens";
+/**
+ * @typedef {import("../presale-gg/api/api.types").API.PaymentToken} PaymentToken
+ */
 
-export default function TokenSelectDropdown({ tokens, onChange }) {
+/**
+ * @param {object} props
+ * @param {PaymentToken[]} props.tokens
+ * @param {PaymentToken} [props.selectedToken]
+ * @param {(newToken: PaymentToken) => void} props.onChange
+ * @param {string} [props.defaultLabel]
+ * @param {string} [props.placeholder]
+ * @param {PaymentToken | null} [props.defaultToken]
+ * @param {boolean} props.selected
+ */
+export default function TokenSelectDropdown({ tokens, onChange, selectedToken, selected, defaultLabel, defaultToken, placeholder }) {
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState(tokens[0]);
   const dropdownRef = useRef(null);
 
   const handleSelect = (token) => {
-    setSelected(token);
     setOpen(false);
     onChange?.(token);
   };
+
+  const text = useMemo(() =>
+    selectedToken?.symbol.toUpperCase() ??
+    defaultLabel ??
+    defaultToken?.symbol.toUpperCase() ??
+    placeholder ??
+    'None',
+    [selectedToken, defaultLabel, defaultToken, placeholder]
+  )
+
+  const img = useMemo(() => {
+    if (selectedToken || defaultToken) return tokenImageMap[(selectedToken ?? defaultToken)?.symbol.toLowerCase() ?? '']
+    return null
+  }, [selectedToken, defaultToken])
 
   useEffect(() => {
     function handleClickOutside(event) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setOpen(false);
-      }
-
-
-      
+      }     
     }
 
     document.addEventListener("mousedown", handleClickOutside);
@@ -36,24 +59,22 @@ export default function TokenSelectDropdown({ tokens, onChange }) {
       >
         <span className="flex items-center 2xl:gap-2 xl:gap-2 lg:gap-2 md:gap-2 sm:gap-[5px] gap-[4px] text-[11.7px] font-[700] font-[Inter]">
           <div className="min-w-[20px]">
-            {selected.icon && (
+            {img && (
               <img
-                src={selected.icon}
-                alt={selected.symbol}
+                src={img}
+                alt=''
                 className="2xl:max-h-[20px] xl:max-h-[20px] lg:max-h-[20px] md:max-h-[20px] sm:max-h-[16px] max-h-[16px]"
               />
             )}
           </div>
           <span
-            className={`leading-[10px] text-[#fff] text-start ${
-              selected.symbol === "More" ? "text-[14px] " : "2xl:text-[11.7px] xl:text-[11.7px] lg:text-[11.7px] md:text-[11.7px] sm:text-[9.7px] text-[9.7px] "
-            }`}
+            className={`leading-[10px] text-[#fff] text-start`}
           >
-            {selected.symbol}
+            {text}
             <br />
-            {selected.sub_symbol && (
+            {selectedToken?.chain && (
               <span className="text-[9px] text-[#fff] leading-[8px] font-[400]">
-                {selected.sub_symbol}
+                {selectedToken.chain}
               </span>
             )}
           </span>
@@ -89,13 +110,10 @@ export default function TokenSelectDropdown({ tokens, onChange }) {
               className="flex items-center text-[#fff] gap-x-2 w-full px-3 py-2 text-[11.7px] font-[700] font-[Inter] text-left hover:bg-[#8a8a8aff] bg-[#929292ff]"
              
             >
-              {token.icon && (
-                <img src={token.icon} alt={token.symbol} className="max-h-[20px]" />
+              {tokenImageMap[token.symbol.toLowerCase()] && (
+                <img src={tokenImageMap[token.symbol.toLowerCase()]} alt="" className="max-h-[20px]" />
               )}
-              <span className="flex flex-col leading-[10px] space-y-[-10px]">
-                 {token.symbol} 
-              <span className="text-[9px] font-[500]">{token.sub_symbol}</span>
-              </span>
+              {token.symbol.toUpperCase()}
             </button>
           ))}
         </div>

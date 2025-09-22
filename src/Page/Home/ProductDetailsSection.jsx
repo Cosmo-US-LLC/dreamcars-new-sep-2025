@@ -72,6 +72,11 @@ import { Navigation, Mousewheel, Pagination, Keyboard } from "swiper/modules";
 import cardsvg1 from "../../assects/svgs/cardsvg (1).svg";
 import cardsvg2 from "../../assects/svgs/cardsvg (2).svg";
 import TokenSelectDropdown from "../../components/TokenDropdown";
+import TokenDropdownGrid from "../../components/TokenDropdownGrid";
+
+/**
+ * @typedef {import("../../presale-gg/api/api.types").API.PaymentToken} PaymentToken
+ */
 
 const cardData = [
   {
@@ -147,8 +152,9 @@ const ProductDetailsSection = ({
   const [showDropdown, setShowDropdown] = useState(false);
   const { t, i18n } = useTranslation();
 
-  const [activeButton, setActiveButton] = useState(null);
-  const [selectedToken, setSelectedToken] = useState(null);
+    const [activeButton, setActiveButton] = useState(null);
+    /** @type [PaymentToken | null, (newToken: PaymentToken | null) => void] */
+    const [selectedToken, setSelectedToken] = useState(null);
 
   const buttons = [
     { id: 1, label: "ETH", imgSrc: eth },
@@ -1247,30 +1253,13 @@ const ProductDetailsSection = ({
                                 {/* <span className="text-[#19D548] font-[700]">
                               (+500%)
                             </span> */}
-                              </p>
-                            </div>
-                            <div className="grid grid-cols-3 gap-2 md:grid-cols-5">
-                              {tokenSelect.map((data, index) => (
-                                <TokenSelectDropdown
-                                  key={index}
-                                  tokens={data.map((token) => ({
-                                    ...token,
-                                    icon:
-                                      tokenImageMap[
-                                        token.symbol.toLowerCase()
-                                      ] || // match by symbol
-                                      chainImgMap[
-                                        token.sub_symbol?.toUpperCase()
-                                      ] || // match by chain
-                                      undefined, // fallback
-                                  }))}
-                                  onChange={(token) =>
-                                    console.log(`Dropdown ${index + 1}:`, token)
-                                  }
-                                />
-                              ))}
-                            </div>
-                            {/* <div className="grid grid-cols-3 gap-3">
+                        </p>
+                      </div>
+                      <TokenDropdownGrid
+                        selectedToken={selectedToken}
+                        onTokenChange={setSelectedToken}
+                      />
+                       {/* <div className="grid grid-cols-3 gap-3">
                         {buttons.map((button) => (
                           <button
                             key={button.id}
@@ -1522,170 +1511,159 @@ const ProductDetailsSection = ({
                                         );
                                       })()}
                                     </div>
-                                  );
-                                }}
-                              </ConnectButton.Custom>
-                            </div>
-                            {show && (
-                              <div className="flex relative z-[1]">
-                                <input
-                                  type="text"
-                                  className="h-[44px] w-[100%] px-2 outline-none rounded-l"
-                                  placeholder="Bonus code"
-                                  onChange={(e) => {
-                                    setCoupon(e.target.value.toLowerCase());
-                                  }}
-                                />
-                                <button
-                                  className="flex h-[44px] items-center text-white rounded-r space-y-3 px-5   bg-black"
-                                  onClick={handleCoupon}
-                                >
-                                  <p className="text-[12px] text-whites font-[700]">
-                                    {t(
-                                      "ProductDetails.card-body-Bonus-code-apply"
-                                    )}
-                                  </p>
-                                </button>
-                              </div>
-                            )}
-                          </div>
-                        </div>
+                                );
+                            }}
+                        </ConnectButton.Custom>
                       </div>
-                      <div className="max-w-[733px] pb-[1rem] w-[100%] mx-auto">
-                        <div className=" flex justify-between relative z-[1] space-x-[15px] xs:pt-[0.5rem]">
-                          <a
-                            href="#how-to-buy"
-                            onClick={handleLinkClick}
-                            data-offset="100"
-                            className="cursor-pointer border border-[#DDD] text-[14px] xs:text-[11px] font-[500]  leading-[21px] flex w-[100%] max-w-[356.62px] h-[40px] items-center justify-center text-white font-[Lato] rounded-[10px] bg-[#323232]"
-                          >
-                            {" "}
-                            <img
-                              className="pr-[10px] w-[25px] h-[25px]"
-                              src={que}
-                              alt=""
-                            />{" "}
-                            {t("ProductDetails.card-body-buyBtn")}
-                          </a>
-
-                          {!userAddress ? (
-                            <button
-                              onClick={openConnectModal}
-                              className="cursor-pointer border border-[#DDD] text-[14px] xs:text-[11px] font-[500] font-[Lato] leading-[21px] flex w-[100%] max-w-[356.62px] h-[40px] items-center justify-center text-white  rounded-[10px] bg-[#323232]"
-                            >
-                              {" "}
-                              <img
-                                className="pr-[10px] w-[25px] h-[25px]"
-                                src={refe}
-                                alt=""
-                              />
-                              {t("ProductDetails.card-body-referralBtn")}
-                            </button>
-                          ) : (
-                            <button
-                              onClick={handleCopy}
-                              className="cursor-pointer border border-[#DDD] text-[14px] xs:text-[11px] font-[500] font-[Lato] leading-[21px] flex w-[100%] max-w-[356.62px] h-[40px] items-center justify-center text-white  rounded-[10px] bg-[#323232]"
-                            >
-                              {" "}
-                              <img
-                                className="pr-[10px] w-[25px] h-[25px]"
-                                src={refe}
-                                alt=""
-                              />
-                              {t("ProductDetails.card-body-referralBtn")}
-                            </button>
-                          )}
-                        </div>
-                      </div>
-
-                      {!show && (
-                        <div className="pb-[18px] relative z-[1]">
-                          <p
-                            onClick={handelBonus}
-                            className="cursor-pointer text-[#DDD] underline text-center  text-[16px] font-[500] leading-[7px]"
-                          >
-                            {t("ProductDetails.card-body-Bonus-code")}
-                          </p>
+                      {show && (
+                        <div className="flex relative z-[1]">
+                          <input
+                            type="text"
+                            className="h-[44px] w-[100%] px-2 outline-none rounded-l"
+                            placeholder="Bonus code" onChange={(e) => {
+                                setCoupon(e.target.value.toLowerCase())
+                            }}
+                          />
+                          <button className="flex h-[44px] items-center text-white rounded-r space-y-3 px-5   bg-black"  onClick={handleCoupon}>
+                            <p className="text-[12px] text-whites font-[700]">
+                              {t("ProductDetails.card-body-Bonus-code-apply")}
+                            </p>
+                          </button>
                         </div>
                       )}
                     </div>
                   </div>
-                  <div className="max-w-[894px] mt-[25px] mx-auto w-[100%] flex items-center py-[0px] xs:!pt-[0px] justify-between space-x-[1rem]">
-                    <div className="w-[518px] h-[50px] xs:h-[40px] relative z-[9] flex justify-center items-center gradient-border-mask-own-last backdrop-blur-md bg-[#5555556e] xs:bg-[#ffffff08]">
-                      <a
-                        href="https://github.com/solidproof/projects/blob/main/2024/Dreamcars/EVM_Audit_SolidProof_Dreamcars.pdf"
-                        target="_blank"
-                        className="relative z-[20] 2xl:text-[18px]  xl:text-[18px] lg:text-[18px] md:text-[18px] sm:text-[16.871px]  text-[11px]  text-white underline font-[Lato]"
-                      >
-                        {t("ProductDetails.para3last")}
-                      </a>
-                    </div>
-                    <div className="w-[100%] max-w-[345.254px] h-[50px] xs:h-[40px] relative z-[9] flex justify-center items-center gradient-border-mask-own-last backdrop-blur-md bg-[#5555556e] xs:bg-[#ffffff08]">
+                </div>
+                <div className="max-w-[733px] pb-[1rem] w-[100%] mx-auto">
+                  <div className=" flex justify-between relative z-[1] space-x-[15px] xs:pt-[0.5rem]">
+                    <a
+                      href="#how-to-buy"
+                      onClick={handleLinkClick}
+                      data-offset="100"
+                      className="cursor-pointer border border-[#DDD] text-[14px] xs:text-[11px] font-[500]  leading-[21px] flex w-[100%] max-w-[356.62px] h-[40px] items-center justify-center text-white font-[Lato] rounded-[10px] bg-[#323232]"
+                    >
+                      {" "}
                       <img
-                        className="max-h-[40px] xs:h-[28px]"
-                        src={Solid}
+                        className="pr-[10px] w-[25px] h-[25px]"
+                        src={que}
                         alt=""
-                      />
-                    </div>
+                      />{" "}
+                      {t("ProductDetails.card-body-buyBtn")}
+                    </a>
+                    
+                    {!userAddress ?
+                      <button
+                          onClick={openConnectModal}
+                      className="cursor-pointer border border-[#DDD] text-[14px] xs:text-[11px] font-[500] font-[Lato] leading-[21px] flex w-[100%] max-w-[356.62px] h-[40px] items-center justify-center text-white  rounded-[10px] bg-[#323232]"
+                      >
+                          {" "}
+                          <img
+                        className="pr-[10px] w-[25px] h-[25px]"
+                              src={refe}
+                              alt=""
+                          />
+                          {t("ProductDetails.card-body-referralBtn")}
+                      </button> :
+
+                      <button
+                          onClick={handleCopy}
+                      className="cursor-pointer border border-[#DDD] text-[14px] xs:text-[11px] font-[500] font-[Lato] leading-[21px] flex w-[100%] max-w-[356.62px] h-[40px] items-center justify-center text-white  rounded-[10px] bg-[#323232]"
+                      >
+                          {" "}
+                          <img
+                        className="pr-[10px] w-[25px] h-[25px]"
+                              src={refe}
+                              alt=""
+                          />
+                          {t("ProductDetails.card-body-referralBtn")}
+                      </button>
+                      
+                      }
                   </div>
                 </div>
+                
+                {!show && (
+                  <div className="pb-[18px] relative z-[1]">
+                    <p
+                      onClick={handelBonus}
+                      className="cursor-pointer text-[#DDD] underline text-center  text-[16px] font-[500] leading-[7px]"
+                    >
+                      {t("ProductDetails.card-body-Bonus-code")}
+                    </p>
+                  </div>
+                )}
               </div>
-              <div className="px-[23px]  py-[10px] !mt-[15px] relative z-[9] gradient-border-mask-own-hero-cent backdrop-blur-md bg-[#ffffff08] flex justify-between max-w-[894px] mx-auto ">
-                <h4 className="text-[18px] xs:text-[9px] font-[700] w-[378px] mx-auto text-[#fff] self-center">
-                  Share Dreamcars with Friends
-                </h4>
-                <div className="flex justify-end space-x-[10px] xs:space-x-[5px] ">
-                  <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] relative z-[9] flex justify-center items-center gradient-border-mask-no-blur-button overflow-hidden hidden xs:flex">
-                    <a
-                      href="#"
-                      target=""
-                      rel="noopener noreferrer"
-                      className="relative z-[20]"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleShare();
-                      }}
-                    >
-                      <img
-                        src={sharelogo}
-                        className="h-[22px] xs:h-[18px] w-[22px] xs:w-[18px] text-white cursor-pointer"
-                      />
-                    </a>
-                  </div>
-                  <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] relative z-[9] flex justify-center items-center overflow-hidden gradient-border-mask-no-blur-button">
-                    <a
-                      href="#"
-                      target=""
-                      rel="noopener noreferrer"
-                      className="relative z-[20]"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        copyUrlToClipboard();
-                      }}
-                    >
-                      <FaLink className="h-[22px] xs:h-[15px] w-[22px] xs:w-[20px] text-white cursor-pointer" />
-                    </a>
-                  </div>
-                  <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] flex justify-center items-center gradient-border-mask-no-blur-button overflow-hidden">
-                    <a
-                      href="https://twitter.com/dreamcars_bsc"
-                      target="_blank"
-                      className="cursor-pointer relative z-[20]"
-                      rel="noopener noreferrer"
-                    >
-                      <FaTwitter className="h-[22px] xs:h-[15px] w-[22px] xs:w-[20px] text-white cursor-pointer" />
-                    </a>
-                  </div>
-                  <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] flex justify-center items-center gradient-border-mask-no-blur-button overflow-hidden">
-                    <a
-                      href="https://t.me/Dreamcars_bsc"
-                      target="_blank"
-                      className="relative z-[20] cursor-pointer"
-                      rel="noopener noreferrer"
-                    >
-                      <BsFillSendFill className="h-[22px] xs:h-[15px] w-[22px] xs:w-[20px] text-white cursor-pointer" />
-                    </a>
-                  </div>
+            </div>
+            <div className="max-w-[894px] mt-[25px] mx-auto w-[100%] flex items-center py-[0px] xs:!pt-[0px] justify-between space-x-[1rem]">
+              <div className="w-[518px] h-[50px] xs:h-[40px] relative z-[9] flex justify-center items-center gradient-border-mask-own-last backdrop-blur-md bg-[#5555556e] xs:bg-[#ffffff08]">
+                <a
+                  href="https://github.com/solidproof/projects/blob/main/2024/Dreamcars/EVM_Audit_SolidProof_Dreamcars.pdf"
+                  target="_blank"
+                  className="relative z-[20] 2xl:text-[18px]  xl:text-[18px] lg:text-[18px] md:text-[18px] sm:text-[16.871px]  text-[11px]  text-white underline font-[Lato]" rel="noreferrer"
+                >
+                  {t("ProductDetails.para3last")}
+                </a>
+              </div>
+              <div className="w-[100%] max-w-[345.254px] h-[50px] xs:h-[40px] relative z-[9] flex justify-center items-center gradient-border-mask-own-last backdrop-blur-md bg-[#5555556e] xs:bg-[#ffffff08]">
+                <img className="max-h-[40px] xs:h-[28px]" src={Solid} alt="" />
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        <div className="px-[23px]  py-[10px] !mt-[15px] relative z-[9] gradient-border-mask-own-hero-cent backdrop-blur-md bg-[#ffffff08] flex justify-between max-w-[894px] mx-auto ">
+          <h4 className="text-[18px] xs:text-[9px] font-[700] w-[378px] mx-auto text-[#fff] self-center">
+          Share Dreamcars with Friends
+          </h4>
+          <div className="flex justify-end space-x-[10px] xs:space-x-[5px] ">
+            <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] relative z-[9] flex justify-center items-center gradient-border-mask-no-blur-button overflow-hidden hidden xs:flex">
+              <a
+                href="#"
+                target=""
+                rel="noopener noreferrer"
+                className="relative z-[20]"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleShare();
+                }}
+              >
+                <img src={sharelogo} className="h-[22px] xs:h-[18px] w-[22px] xs:w-[18px] text-white cursor-pointer" />
+              </a>
+            </div>
+            <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] relative z-[9] flex justify-center items-center overflow-hidden gradient-border-mask-no-blur-button">
+              <a
+                href="#"
+                target=""
+                rel="noopener noreferrer"
+                className="relative z-[20]"
+                onClick={(e) => {
+                  e.preventDefault();
+                  copyUrlToClipboard();
+                }}
+              >
+                <FaLink className="h-[22px] xs:h-[15px] w-[22px] xs:w-[20px] text-white cursor-pointer" />
+              </a>
+            </div>
+            <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] flex justify-center items-center gradient-border-mask-no-blur-button overflow-hidden">
+              <a
+                href="https://twitter.com/dreamcars_bsc"
+                target="_blank"
+                className="cursor-pointer relative z-[20]"
+                rel="noopener noreferrer"
+              >
+                <FaTwitter className="h-[22px] xs:h-[15px] w-[22px] xs:w-[20px] text-white cursor-pointer" />
+              </a>
+            </div>
+            <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] flex justify-center items-center gradient-border-mask-no-blur-button overflow-hidden">
+              <a
+                href="https://t.me/Dreamcars_bsc"
+                target="_blank"
+                className="relative z-[20] cursor-pointer"
+                rel="noopener noreferrer"
+              >
+                <BsFillSendFill className="h-[22px] xs:h-[15px] w-[22px] xs:w-[20px] text-white cursor-pointer" />
+              </a>
+            </div>
 
                   <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] flex justify-center items-center gradient-border-mask-no-blur-button">
                     <a
