@@ -311,7 +311,7 @@ const RoadMap = () => {
                                             <div className="">
                                                 {
                                                     item.paraData.map((i, k) => (
-                                                        <div className="flex">
+                                                        <div className="flex" key={k}>
     
                                                             {i.tickIcon &&
                                                                 <img className="w-[17px] h-[15px]  mr-2" src={i.tickIcon} alt="" />

@@ -32,14 +32,17 @@ import token7 from "../../assects/icons/wallet_icon/token (3).svg";
 import token8 from "../../assects/icons/wallet_icon/token (2).svg";
 import token9 from "../../assects/icons/wallet_icon/token (1).svg";
 
-import { tokenImageMap, chainImgMap } from "../../assects/tokens/index";
+import BuyWidget from "../../components/BuyWidget"
 
-import Parse from "parse";
-import "@rainbow-me/rainbowkit/styles.css";
+import Parse from 'parse';
+import '@rainbow-me/rainbowkit/styles.css';
 
-import axios from "axios";
+import axios from 'axios'
 
-import { bsc } from "wagmi/chains";
+import { bsc } from 'wagmi/chains'
+import { useWriteContract, useAccount, useBalance, useSendTransaction } from 'wagmi'
+import { useReadContract, useWaitForTransactionReceipt } from 'wagmi'
+import { useSwitchChain, useChainId } from 'wagmi'
 import {
   useWriteContract,
   useAccount,
@@ -754,278 +757,220 @@ const ProductDetailsSection = ({
               </div>
             </div>
 
-            <div className="w-[22%] space-y-[20px] 2xl:block xl:block lg:block md:block sm:hidden hidden">
-              <div className="max-w-[270px] h-[142px] w-[100%] flex flex-col items-center justify-center py-[30px] px-[30px] backdrop-blur-md m-0 bg-[#d1d5db1f] space-y-[15px] gradient-border-mask-own-hero rounded-[13.827px]">
-                <h4 className="text-[#fff] text-[24px] text-center max-w-[220px] text-center w-[100%]  font-[800] leading-[22px] ">
-                  Own A Piece Of
-                  <br />
-                  Your Dream Car!
-                </h4>
-                <img
-                  className="opacity-[0.6] max-h-[35px]"
-                  src={icns6}
-                  alt=""
-                />
-              </div>
-              <div className="max-w-[270px] h-[142px] w-[100%] flex flex-col items-center justify-center py-[30px] px-[0px] backdrop-blur-md m-0 bg-[#d1d5db1f] space-y-[15px] gradient-border-mask-own-hero rounded-[13.827px]">
-                <h4 className="text-[#fff] text-[24px]  w-[100%]  font-[800] leading-[22px] text-center ">
-                  This Has Never
-                  <br />
-                  Been Done Before!
-                </h4>
-                <img
-                  className="opacity-[0.6] max-h-[35px]"
-                  src={icns2}
-                  alt=""
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="px-[23px] xs:px-[8px] py-[13px] relative z-[9] gradient-border-mask-own-hero-cent backdrop-blur-md bg-[#ffffff08] xs:space-x-2 flex justify-center max-w-[1260px] mx-auto items-center">
-            <div className="flex 2xl:flex-row xl:flex-row 2xl:space-y-0 xl:space-y-0 lg:space-y-0 md:space-y-0 sm:space-y-4 space-y-4 lg:flex-row md:flex-row sm:flex-col flex-col justify-between max-w-[1120px] w-[100%] mx-auto items-center">
-              <h4 className="2xl:text-[20px] xl:text-[20px] lg:text-[20px] md:text-[20px] sm:text-[20px] text-[12px] font-[800] text-[#fff] ml-3">
-                $DCARS Pre-Sale is Live <span className="xs:hidden">Now</span>
-              </h4>
-              <div className="flex justify-center space-x-[10px] xs:space-x-[4px] ">
-                <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
-                  <img
-                    className="w-[22px] h-[22px]  xs:h-[20px] xs:h-[20px]"
-                    src={token1}
-                    alt=""
-                  />
-                </div>
-                <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
-                  <img
-                    className="w-[22px] h-[22px]  xs:h-[20px] xs:h-[20px]"
-                    src={token2}
-                    alt=""
-                  />
-                </div>
-                <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
-                  <div className="w-[22px] h-[22px]  xs:h-[20px] xs:h-[20px]">
-                    <img src={token3} alt="" />
-                  </div>
-                </div>
-                <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
-                  <div className="w-[22px] h-[22px]  xs:w-[20px] xs:h-[20px]">
-                    <img src={token4} alt="" />
-                  </div>
-                </div>
-                <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
-                  <div className="w-[22px] h-[22px]  xs:w-[20px] xs:h-[20px]">
-                    <img src={token5} alt="" />
-                  </div>
-                </div>
-                <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
-                  <div className="w-[22px] h-[22px]  xs:w-[20px] xs:h-[20px]">
-                    <img src={token6} alt="" />
-                  </div>
-                </div>
-                <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
-                  <div className="w-[22px] h-[22px]  xs:w-[20px] xs:h-[20px]">
-                    <img src={token7} alt="" />
-                  </div>
-                </div>
-                <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
-                  <div className="w-[22px] h-[22px]  xs:w-[20px] xs:h-[20px]">
-                    <img src={token8} alt="" />
-                  </div>
-                </div>
-                <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
-                  <div className="w-[22px] h-[22px]  xs:w-[20px] xs:h-[20px]">
-                    <img src={token9} alt="" />
-                  </div>
-                </div>
-              </div>
-              <button className="text-[16px] xs:text-[10px] ftbutton2  font-[700] text-[#000] w-[158px] xs:w-[70px] h-[41px] xs:h-[24px] bgherobtn xs:!rounded-[7px] border-[transparent] border hover:bg-[transparent] hover:text-[#FFD02F] hover:border hover:border-[#FFD02F] ">
-                <a href="#buynow" data-offset="60">
-                  Buy Now{" "}
-                </a>
-              </button>
-            </div>
-          </div>
-
-          <div className="2xl:hidden xl:hidden lg:hidden !mt-[20px] md:hidden sm:flex flex space-x-3">
-            <div className="w-[50%] space-y-[10px] ">
-              <div className="max-w-[270px] h-[112px] w-[100%] flex flex-col items-center justify-center py-[20px] px-[15px] backdrop-blur-md m-0 bg-[#d1d5db1f] gradient-border-mask-own-hero rounded-[13.827px]">
-                <h4 className="text-[#fff] text-[16.099px] max-w-[200px] w-[100%] text-center w-[100%]  font-[800] leading-[110%] pb-[13px] ">
-                  The Rolls Royce <br /> Of Crypto!{" "}
-                </h4>
-                <img
-                  className="opacity-[0.6] max-h-[35px]"
-                  src={icns1}
-                  alt=""
-                />
-              </div>
-              <div className="max-w-[270px] h-[112px] w-[100%] flex flex-col items-center justify-center py-[20px] px-[15px] backdrop-blur-md m-0 bg-[#d1d5db1f] gradient-border-mask-own-hero rounded-[13.827px]">
-                <h4 className="text-[#fff] text-[16.099px] text-center max-w-[220px] w-[100%]  font-[800] leading-[110%]">
-                  A New Era
-                  <br />
-                  Of Cryptocurrency!{" "}
-                </h4>
-                <img
-                  className="opacity-[0.6] max-h-[35px]"
-                  src={icns4}
-                  alt=""
-                />
-              </div>
-            </div>
-            <div className="w-[50%] space-y-[10px] ">
-              <div className="max-w-[270px] h-[112px] w-[100%] flex flex-col items-center justify-center py-[20px] px-[15px] backdrop-blur-md m-0 bg-[#d1d5db1f] gradient-border-mask-own-hero rounded-[13.827px]">
-                <h4 className="text-[#fff] text-[16.099px] text-center max-w-[220px] text-center w-[100%]  font-[800] leading-[110%] pb-[8px]  ">
-                  Own A Piece Of
-                  <br />
-                  Your Dream Car!
-                </h4>
-                <img
-                  className="opacity-[0.6] max-h-[35px]"
-                  src={icns6}
-                  alt=""
-                />
-              </div>
-              <div className="max-w-[270px] h-[112px] w-[100%] flex flex-col items-center justify-center py-[20px] px-[15px] backdrop-blur-md m-0 bg-[#d1d5db1f] gradient-border-mask-own-hero rounded-[13.827px]">
-                <h4 className="text-[#fff] text-[16.099px]  w-[100%]  font-[800] leading-[110%] text-center pb-[10px] ">
-                  This Has Never
-                  <br />
-                  Been Done Before!
-                </h4>
-                <img
-                  className="opacity-[0.6] max-h-[24px]"
-                  src={icns2}
-                  alt=""
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className=" pt-[1rem]  xs:pb-[0rem] xs:pt-[2rem]">
-            <div className=" space-y-4  2xl:w-[100%] xl:w-[100%] lg:w-[100%] md:w-[100%] sm:w-[100%] w-[100%] max-w-[1276px] mx-auto ">
-              <div className="2xl:space-y-[45px]  xl:space-y-[45px] lg:space-y-4 xs:space-y-8 sm:space-y-3 md:space-y-3 lg:block xs:block md:block sm:block">
-                <div className="">
-                  <h3 className="text-[46px] xs:text-[28px] xs:leading-[117%] text-center font-[700] text-[#fff]">
-                    Multiple Times Awarded
-                  </h3>
-                </div>
-                <div className="2xl:flex xl:flex lg:flex md:flex sm:hidden hidden flex-wrap gap-x-[24px] pb-[50px]">
-                  {cardData.map((item) => (
-                    <div className="gradient-border-mask-build-awarded bg-[#ffffff12] max-w-[293px] w-[100%] min-h-[194px] h-[100%] p-[15px] flex justify-center items-center relative">
-                      <img
-                        src={cardsvg2}
-                        className="absolute left-[5%] top-[16%]"
-                        alt=""
-                      />
-                      <div>
-                        <p className="text-[#FFD02F] text-[32px] text-center leading-[34px]">
-                          #{" "}
-                          <span className="ml-[-10px] text-[63px] font-[400]">
-                            1
-                          </span>
-                        </p>
-                        <h3
-                          className={`text-[26px] ${item.titleWidth} w-[100%] font-[900] pt-[3px] pb-[8px] text-center text-[#fff] leading-[23.29px]`}
-                        >
-                          {item.title}
-                        </h3>
-                        <div className="flex justify-center items-center space-x-2">
-                          <hr className="w-[30px] h-[0px] border-[#FFD02F] border-t" />
-                          <p className="text-[14px] font-[700] text-[#FFD02F] text-center">
-                            Dreamcars
-                          </p>
-                          <hr className="w-[30px] h-[0px] border-[#FFD02F] border-t" />
-                        </div>
-                        <p className="text-[10px] text-[#FFD02F] font-[700] text-center">
-                          {item.para}
-                        </p>
-                      </div>
-                      <img
-                        src={cardsvg1}
-                        alt=""
-                        className="absolute right-[5%] top-[16%]"
-                      />
-                    </div>
-                  ))}
-                </div>
-                <div className="w-[100%] 2xl:hidden xl:hidden lg:hidden md:hidden sm:block block space-y-[15px]">
-                  <Swiper
-                    breakpoints={{
-                      360: {
-                        slidesPerView: 1,
-                        spaceBetween: 20,
-                      },
-                      600: {
-                        slidesPerView: 1,
-                        spaceBetween: 20,
-                      },
-                      750: {
-                        slidesPerView: 1,
-                        spaceBetween: 20,
-                      },
-                      1124: {
-                        slidesPerView: 1,
-                        spaceBetween: 20,
-                      },
-                      1440: {
-                        slidesPerView: 1,
-                        spaceBetween: 20,
-                      },
-                    }}
-                    pagination={true}
-                    keyboard={true}
-                    spaceBetween={14}
-                    className="mySwiper !px-[0.3rem] xs:!px-[1rem] h-[230px]"
-                    navigation={true}
-                    modules={[Navigation, Pagination, Keyboard]}
-                  >
-                    {cardData.map((item) => (
-                      <SwiperSlide>
-                        <div className="gradient-border-mask-build-awarded bg-[#ffffff12] max-w-[293px] mx-auto w-[100%] min-h-[194px] max-h-[194px] h-[100%] p-[15px] flex justify-center items-center relative">
-                          <img
-                            src={cardsvg2}
-                            className="absolute left-[5%] top-[16%]"
-                            alt=""
-                          />
-                          <div>
-                            <p className="text-[#FFD02F] text-[32px] text-center leading-[34px]">
-                              #{" "}
-                              <span className="ml-[-10px] text-[63px] font-[400]">
-                                1
-                              </span>
-                            </p>
-                            <h3
-                              className={`text-[26px] ${item.titleWidth} w-[100%] font-[900] pt-[3px] pb-[8px] text-center text-[#fff] leading-[23.29px]`}
-                            >
-                              {item.title}
-                            </h3>
-                            <div className="flex justify-center items-center space-x-2">
-                              <hr className="w-[30px] h-[0px] border-[#FFD02F] border-t" />
-                              <p className="text-[14px] font-[700] text-[#FFD02F] text-center">
-                                Dreamcars
-                              </p>
-                              <hr className="w-[30px] h-[0px] border-[#FFD02F] border-t" />
+                        <div className="w-[22%] space-y-[20px] 2xl:block xl:block lg:block md:block sm:hidden hidden">
+                            <div className="max-w-[270px] h-[142px] w-[100%] flex flex-col items-center justify-center py-[30px] px-[30px] backdrop-blur-md m-0 bg-[#d1d5db1f] space-y-[15px] gradient-border-mask-own-hero rounded-[13.827px]">
+                                <h4 className="text-[#fff] text-[24px] text-center max-w-[220px] text-center w-[100%]  font-[800] leading-[22px] ">Own A Piece Of<br />Your Dream Car!</h4>
+                                <img className="opacity-[0.6] max-h-[35px]" src={icns6} alt="" />
                             </div>
-                            <p className="text-[10px] text-[#FFD02F] font-[700] text-center">
-                              {item.para}
-                            </p>
-                          </div>
-                          <img
-                            src={cardsvg1}
-                            alt=""
-                            className="absolute right-[5%] top-[16%]"
-                          />
+                            <div className="max-w-[270px] h-[142px] w-[100%] flex flex-col items-center justify-center py-[30px] px-[0px] backdrop-blur-md m-0 bg-[#d1d5db1f] space-y-[15px] gradient-border-mask-own-hero rounded-[13.827px]">
+                                <h4 className="text-[#fff] text-[24px]  w-[100%]  font-[800] leading-[22px] text-center ">This Has Never
+                                <br />Been Done Before!</h4>
+                                <img className="opacity-[0.6] max-h-[35px]" src={icns2} alt="" />
+                            </div>
                         </div>
-                      </SwiperSlide>
-                    ))}
-                  </Swiper>
-                </div>
-              </div>
-            </div>
+                    </div>
+                    
+                    <div className="px-[23px] xs:px-[8px] py-[13px] relative z-[9] gradient-border-mask-own-hero-cent backdrop-blur-md bg-[#ffffff08] xs:space-x-2 flex justify-center max-w-[1260px] mx-auto items-center">
+                       <div className="flex 2xl:flex-row xl:flex-row 2xl:space-y-0 xl:space-y-0 lg:space-y-0 md:space-y-0 sm:space-y-4 space-y-4 lg:flex-row md:flex-row sm:flex-col flex-col justify-between max-w-[1120px] w-[100%] mx-auto items-center">
+                         <h4 className="2xl:text-[20px] xl:text-[20px] lg:text-[20px] md:text-[20px] sm:text-[20px] text-[12px] font-[800] text-[#fff] ml-3">$DCARS Pre-Sale is Live <span className="xs:hidden">Now</span></h4>
+                        <div className="flex justify-center space-x-[10px] xs:space-x-[4px] ">
+                            <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
+                                <img className="w-[22px] h-[22px]  xs:h-[20px] xs:h-[20px]" src={token1} alt="" />
+                            </div>
+                            <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
+                                <img className="w-[22px] h-[22px]  xs:h-[20px] xs:h-[20px]" src={token2} alt="" />
+                            </div>
+                            <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
+                                <div className="w-[22px] h-[22px]  xs:h-[20px] xs:h-[20px]">
+                                    <img src={token3} alt="" />
+                                </div>
+                            </div>
+                              <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
+                                <div className="w-[22px] h-[22px]  xs:w-[20px] xs:h-[20px]">
+                                    <img src={token4} alt="" />
+                                </div>
+                            </div>
+                              <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
+                                <div className="w-[22px] h-[22px]  xs:w-[20px] xs:h-[20px]">
+                                    <img src={token5} alt="" />
+                                </div>
+                            </div>
+                              <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
+                                <div className="w-[22px] h-[22px]  xs:w-[20px] xs:h-[20px]">
+                                    <img src={token6} alt="" />
+                                </div>
+                            </div>
+                              <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
+                                <div className="w-[22px] h-[22px]  xs:w-[20px] xs:h-[20px]">
+                                    <img src={token7} alt="" />
+                                </div>
+                            </div>
+                              <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
+                                <div className="w-[22px] h-[22px]  xs:w-[20px] xs:h-[20px]">
+                                    <img src={token8} alt="" />
+                                </div>
+                            </div>
+                              <div className="w-[58px] h-[41px] xs:w-[30px] xs:h-[30px] flex justify-center items-center gradient-border-mask-own-hero-icn backdrop-blur-md bg-[#ffffff08]">
+                                <div className="w-[22px] h-[22px]  xs:w-[20px] xs:h-[20px]">
+                                    <img src={token9} alt="" />
+                                </div>
+                            </div>
+                        </div>
+                        <button className="text-[16px] xs:text-[10px] ftbutton2  font-[700] text-[#000] w-[158px] xs:w-[70px] h-[41px] xs:h-[24px] bgherobtn xs:!rounded-[7px] border-[transparent] border hover:bg-[transparent] hover:text-[#FFD02F] hover:border hover:border-[#FFD02F] "><a href="#buynow" data-offset="60">Buy Now </a></button>
+                       </div>
+                    </div>
+                    
+                    <div className="2xl:hidden xl:hidden lg:hidden !mt-[20px] md:hidden sm:flex flex space-x-3">
+                        <div className="w-[50%] space-y-[10px] ">
+                            <div className="max-w-[270px] h-[112px] w-[100%] flex flex-col items-center justify-center py-[20px] px-[15px] backdrop-blur-md m-0 bg-[#d1d5db1f] gradient-border-mask-own-hero rounded-[13.827px]">
+                                <h4 className="text-[#fff] text-[16.099px] max-w-[200px] w-[100%] text-center w-[100%]  font-[800] leading-[110%] pb-[13px] ">The Rolls Royce <br /> Of Crypto! </h4>
+                                <img className="opacity-[0.6] max-h-[35px]" src={icns1} alt="" />
+                            </div>
+                            <div className="max-w-[270px] h-[112px] w-[100%] flex flex-col items-center justify-center py-[20px] px-[15px] backdrop-blur-md m-0 bg-[#d1d5db1f] gradient-border-mask-own-hero rounded-[13.827px]">
+                                <h4 className="text-[#fff] text-[16.099px] text-center max-w-[220px] w-[100%]  font-[800] leading-[110%]">A New Era<br />Of Cryptocurrency!                                </h4>
+                                <img className="opacity-[0.6] max-h-[35px]" src={icns4} alt="" />
+                            </div>
+                        </div>
+                        <div className="w-[50%] space-y-[10px] ">
+                            <div className="max-w-[270px] h-[112px] w-[100%] flex flex-col items-center justify-center py-[20px] px-[15px] backdrop-blur-md m-0 bg-[#d1d5db1f] gradient-border-mask-own-hero rounded-[13.827px]">
+                                <h4 className="text-[#fff] text-[16.099px] text-center max-w-[220px] text-center w-[100%]  font-[800] leading-[110%] pb-[8px]  ">Own A Piece Of<br />Your Dream Car!
+                                </h4>
+                                <img className="opacity-[0.6] max-h-[35px]" src={icns6} alt="" />
+                            </div>
+                            <div className="max-w-[270px] h-[112px] w-[100%] flex flex-col items-center justify-center py-[20px] px-[15px] backdrop-blur-md m-0 bg-[#d1d5db1f] gradient-border-mask-own-hero rounded-[13.827px]">
+                                <h4 className="text-[#fff] text-[16.099px]  w-[100%]  font-[800] leading-[110%] text-center pb-[10px] ">This Has Never
+<br />Been Done Before!</h4>
+                                <img className="opacity-[0.6] max-h-[24px]" src={icns2} alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    
+    <div
+      className=" pt-[1rem]  xs:pb-[0rem] xs:pt-[2rem]"
+    >
+      <div className=" space-y-4  2xl:w-[100%] xl:w-[100%] lg:w-[100%] md:w-[100%] sm:w-[100%] w-[100%] max-w-[1276px] mx-auto ">
+        <div className="2xl:space-y-[45px]  xl:space-y-[45px] lg:space-y-4 xs:space-y-8 sm:space-y-3 md:space-y-3 lg:block xs:block md:block sm:block">
+          <div className="">
+            <h3 className="text-[46px] xs:text-[28px] xs:leading-[117%] text-center font-[700] text-[#fff]">
+              Multiple Times Awarded
+            </h3>
           </div>
-          <div className="relative w-full h-auto">
-            {isMobile ? (
-              <div className="">
-                <div className="flex flex-col items-center px-4 backdrop-blur-md bg-[#d1d5db1f] rounded-[30px] gradient-border-mask w-[100%] max-w-[1276px] mx-auto">
-                  {/* <img
+          <div className="2xl:flex xl:flex lg:flex md:flex sm:hidden hidden flex-wrap gap-x-[24px] pb-[50px]">
+            {cardData.map((item, i) => (
+              <div className="gradient-border-mask-build-awarded bg-[#ffffff12] max-w-[293px] w-[100%] min-h-[194px] h-[100%] p-[15px] flex justify-center items-center relative" key={i}>
+                <img
+                  src={cardsvg2}
+                  className="absolute left-[5%] top-[16%]"
+                  alt=""
+                />
+                <div>
+                  <p className="text-[#FFD02F] text-[32px] text-center leading-[34px]">
+                    #{" "}
+                    <span className="ml-[-10px] text-[63px] font-[400]">1</span>
+                  </p>
+                  <h3
+                    className={`text-[26px] ${item.titleWidth} w-[100%] font-[900] pt-[3px] pb-[8px] text-center text-[#fff] leading-[23.29px]`}
+                  >
+                    {item.title}
+                  </h3>
+                  <div className="flex justify-center items-center space-x-2">
+                    <hr className="w-[30px] h-[0px] border-[#FFD02F] border-t" />
+                    <p className="text-[14px] font-[700] text-[#FFD02F] text-center">
+                      Dreamcars
+                    </p>
+                    <hr className="w-[30px] h-[0px] border-[#FFD02F] border-t" />
+                  </div>
+                  <p className="text-[10px] text-[#FFD02F] font-[700] text-center">
+                   {item.para}
+                  </p>
+                </div>
+                <img
+                  src={cardsvg1}
+                  alt=""
+                  className="absolute right-[5%] top-[16%]"
+                />
+              </div>
+            ))}
+          </div>
+          <div className="w-[100%] 2xl:hidden xl:hidden lg:hidden md:hidden sm:block block space-y-[15px]">
+            <Swiper
+            breakpoints={{
+              360: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+              },
+              600: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+              },
+              750: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+              },
+              1124: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+              },
+              1440: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+              },
+            }}
+            pagination={true}
+            keyboard={true}
+            spaceBetween={14}
+            className="mySwiper !px-[0.3rem] xs:!px-[1rem] h-[230px]"
+            navigation={true}
+            modules={[Navigation, Pagination, Keyboard]}
+          >
+              {cardData.map((item) => (
+                 <SwiperSlide >
+                 <div className="gradient-border-mask-build-awarded bg-[#ffffff12] max-w-[293px] mx-auto w-[100%] min-h-[194px] max-h-[194px] h-[100%] p-[15px] flex justify-center items-center relative">
+                <img
+                  src={cardsvg2}
+                  className="absolute left-[5%] top-[16%]"
+                  alt=""
+                />
+                <div>
+                  <p className="text-[#FFD02F] text-[32px] text-center leading-[34px]">
+                    #{" "}
+                    <span className="ml-[-10px] text-[63px] font-[400]">1</span>
+                  </p>
+                  <h3
+                    className={`text-[26px] ${item.titleWidth} w-[100%] font-[900] pt-[3px] pb-[8px] text-center text-[#fff] leading-[23.29px]`}
+                  >
+                    {item.title}
+                  </h3>
+                  <div className="flex justify-center items-center space-x-2">
+                    <hr className="w-[30px] h-[0px] border-[#FFD02F] border-t" />
+                    <p className="text-[14px] font-[700] text-[#FFD02F] text-center">
+                      Dreamcars
+                    </p>
+                    <hr className="w-[30px] h-[0px] border-[#FFD02F] border-t" />
+                  </div>
+                  <p className="text-[10px] text-[#FFD02F] font-[700] text-center">
+                   {item.para}
+                  </p>
+                </div>
+                <img
+                  src={cardsvg1}
+                  alt=""
+                  className="absolute right-[5%] top-[16%]"
+                />
+              </div>
+                  </SwiperSlide>
+              ))}
+          </Swiper>
+            </div>
+         
+    </div>
+    </div>
+    </div>
+    <div className="relative w-full h-auto">
+      {isMobile ? (
+     <div className="">
+       <div className="flex flex-col items-center px-4 backdrop-blur-md bg-[#d1d5db1f] rounded-[30px] gradient-border-mask w-[100%] max-w-[1276px] mx-auto">
+          {/* <img
             src={DCBG}
             alt="Mobile Banner"
             className="absolute object-cover w-full h-full "
@@ -1119,570 +1064,18 @@ const ProductDetailsSection = ({
             alt="dc text"
             className=" w-[1000px] mx-auto flex-shrink-0 mt-[-4rem]"
           /> */}
-                </div>
-              </div>
-            )}
-          </div>
-          <div>
-            <div
-              id="buynow"
-              className=" space-y-4  2xl:w-[100%] xl:w-[100%] lg:w-[100%] md:w-[100%] sm:w-[100%] w-[100%] max-w-[1276px] mx-auto "
-            >
-              <div className="2xl:space-y-[45px]  xl:space-y-[45px] lg:space-y-4 xs:space-y-3 sm:space-y-3 md:space-y-3 lg:block xs:block md:block sm:block">
-                <div className="w-[100%] xl:w-[100%] mt-[50px] lg:w-[100%] lg:mx-auto flex flex-col justify-end  xs:w-[100%] sm:w-[100%] md:w-[100%] z-[2]">
-                  <div className="backdrop-blur-md max-w-[950px] w-[100%] bg-[#d1d5db1f] mx-auto gradient-border-mask rounded-[34px] space-y-[10px]">
-                    <div className=" pt-[30px] xs:pt-[20px] pb-[14px] xs:pb-[20px] relative  2xl:px-[52px] xl:px-[45px] lg:px-[32px] md:px-[52px] sm:px-[52px] px-[10px]  space-y-4">
-                      <div className="w-[267px] xs:w-[133px] mx-auto absolute top-[-2.5%] left-[35.5%] xs:left-[33.8%]">
-                        <div className="gradient-border-mask-own-hero-title backdrop-blur-xl w-[267px] xs:w-[133px] mx-auto  h-[47px] xs:h-[35px]  flex justify-center items-center">
-                          <h3 className="2xl:text-[20px] xl:text-[20px] lg:text-[20px] md:text-[20px] sm:text-[12px] text-[12px] font-[700] text-center  2xl:leading-[110%] xl:leading-[110%]  lg:leading-[110%] md:leading-[110%] sm:leading-[110%] text-white">
-                            {t("ProductDetails.card-title")}
-                          </h3>
-                        </div>
-                      </div>
-                      <div className="bgposter !bg-[#232323] max-w-[733px] w-[100%] mx-auto ">
-                        <div className="bg-[#212121]  rounded-t-[13px] max-w-[571px] w-[100%] mx-auto xs:px-[15px]  sm:px-16 md:px-16 py-6 xs:pt-4 sm:pt-5 md:pt-8 ">
-                          <h3 className="2xl:text-[40px] xl:text-[40px] lg:text-[34px] md:text-[32px] sm:text-[36px] xs:text-[36px]  font-[700] text-center text-[#fff]">
-                            $
-                            {totalContribution
-                              ? totalContribution.toLocaleString("en-US", {
-                                  minimumFractionDigits: 2,
-                                  maximumFractionDigits: 2,
-                                })
-                              : "1,299,148.38"}
-                          </h3>
-                          {/* <h3 className="2xl:text-[40px] xl:text-[40px] lg:text-[34px] md:text-[32px] sm:text-[36px] xs:text-[36px]  font-[700] text-center text-[#fff]">${totalContributions && totalContributions.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                    </h3> */}
-                          <div className="flex items-center justify-between space-x-2 ">
-                            <h5 className=" text-center font-[Lato] 2xl:text-[18px] xl:text-[18px] lg:text-[18px] md:text-[18px] sm:text-[13px] xs:text-[12px]  text-[#929292]">
-                              {((totalContribution / 1500000) * 100).toFixed(2)}
-                              % {t("of goal raised")}
-                            </h5>
-                            {/* <span className="relative">
-                        <button
-                          onMouseEnter={() => setPop1(true)}
-                          onMouseOut={() => setPop1(false)}
-                          type="button"
-                          className={`cursor-pointer `}
-                        >
-                          <img
-                            src={Iicon}
-                            alt="" 
-                            style={{ marginBottom: "-8px", width: "20px" }}
-                          />
-                        </button>
-                        <div
-                          className={`${
-                            pop1
-                              ? "absolute z-10 w-[220px] right-28  2xl:right-[0px] xl:right-[0px] lg:right-[0px] 2xl:top-[-104px] xl:top-[-104px] lg:top-[-104px] md:right-[0px] md:top-[-56px] sm:right-[0px] sm:top-[-56px] xs:right-[0px] top-[-92px] text-center py-2 px-3 bg-[#ffffff]  rounded-lg text-[#22222] text-sm"
-                              : "hidden"
-                          }`}
-                        >
-                          <span className="text-black font-[Lato]">
-                            The pre-sale (ICO) will take place in multiple
-                            stages, with the $DCARS token price increasing at
-                            each stage.
-                          </span>
-                          <div className="absolute -z-99 w-5 h-5 -bottom-1 sm:right-[10px] xs:right-[10px] right-[10px] bg-[#ffffff] rotate-45"></div>
-                        </div>
-                      </span> */}
-                          </div>
-                          <div>
-                            <div className="z-1 w-full bg-gray-200 rounded-full h-2.5 ">
-                              <div
-                                className="bgcolor h-2.5 rounded-full w-[98%]"
-                                style={{
-                                  width:
-                                    (totalContribution / 1500000) * 100 + `%`,
-                                }}
-                              ></div>
-                              {/* <div className="bgcolor h-2.5 rounded-full w-[98%]"style={{
-                                                    width: '100%'
-                                                }}></div> */}
-                            </div>
-                            <p className="text-end text-[12px] pt-[3px]  text-[#929292]">
-                              $1,500,000
-                            </p>
-                          </div>
-                          <div>
-                            <h5 className="font-[Lato] text-center text-[16px] xs:text-[16px] font-[500] text-white">
-                              {totalParticipants ? totalParticipants : "1861"}{" "}
-                              {t("Contributions")}
-                            </h5>
-
-                            {/* <h5 className="font-[Lato] text-center text-[15px] xs:text-[14px]  font-[500] space-x-1 text-[#929292]">
-                      Launching Price = $0.03
-                      </h5> */}
-                          </div>
-                        </div>
-                        <div className="bg-[#3F3F3F] rounded-b-[10px] px-[50px] pt-2 pb-[30px] xs:pb-5 sm:pb-5 md:pb-8  xs:px-[15px] sm:px-14 md:px-10 ">
-                          <div className="flex justify-between"></div>
-                          <div className="py-1 space-y-3 xs:space-y-3">
-                            {userAddress ? (
-                              <div className="flex backdrop-blur-md bg-[#ffffff40] border-r border-t rounded-[60px]  w-[100%] mx-auto py-[5px]  items-center justify-center">
-                                <p className="text-[14px] text-[#fff] text-center font-[700] ">
-                                  You Own ={" "}
-                                  {finalUserTokens
-                                    ? finalUserTokens.toLocaleString("en-US", {
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2,
-                                      })
-                                    : "0"}{" "}
-                                  DCARS <br></br>
-                                  <span
-                                    className="underline text-[10px]"
-                                    onClick={(e) => {
-                                      handleClose(e);
-                                    }}
-                                  >
-                                    More Info
-                                  </span>
-                                </p>
-                              </div>
-                            ) : (
-                              ""
-                            )}
-                            <div className="flex backdrop-blur-md bg-[#ffffff40] border-r border-t rounded-[60px]  w-[100%] mx-auto  pb-[10px] pt-[8px] items-center justify-center">
-                              <p className="2xl:text-[16px] xl:text-[16px] lg:text-[16px] md:text-[16px] sm:text-[14px] text-[12px] leading-[100%] text-[#fff] text-center font-[700]">
-                                Presale Price ={" "}
-                                <span className="text-[#0c2f71]">$0.013 </span>{" "}
-                                <span className="2xl:text-[20px] xl:text-[20px] lg:text-[20px] md:text-[20px] sm:text-[16px] text-[16px] leading-[70%]">
-                                  |
-                                </span>{" "}
-                                Launch Price ={" "}
-                                <span className="text-[#0c2f71]">$0.03</span>
-                                {/* <span className="text-[#19D548] font-[700]">
-                              (+500%)
-                            </span> */}
-                        </p>
-                      </div>
-                      <TokenDropdownGrid
-                        selectedToken={selectedToken}
-                        onTokenChange={setSelectedToken}
-                      />
-                       {/* <div className="grid grid-cols-3 gap-3">
-                        {buttons.map((button) => (
-                          <button
-                            key={button.id}
-                            onClick={() => handleClickButton(button.id)}
-                            className={`flex items-center xs:h-[40px] sm:h-[40px] h-[48px] w-[100%] justify-center  xs:text-[14px] rounded-[14px] xs:py-1 py-[8px] backdrop-blur transition-all duration-300 ${
-                              activeButton === button.id
-                                ? "bg-white text-black shadow-inner"
-                                : "bg-[#ffffff17] text-white"
-                            }`}
-                          >
-                            <div className="flex flex-col items-center justify-center">
-                              {
-                                 button.imgSrc &&
-                                 <img
-                                src={button.imgSrc}
-                                className="h-[17px]"
-                                alt={button.label}
-                              />
-                              }
-                              <p className="text-[14px] xs:text-[10px] font-[Lato] font-[400] mt-[2px] w-[30px]">
-                                {button.label}
-                              </p>
-                            </div>
-                          </button>
-                        ))}
-                      </div> */}
-                            {/* <div className="2xl:flex justify-between xl:flex lg:flex md:flex flex sm:flex 2xl:space-x-[11px] xl:space-x-[11px] lg:space-x-[11px] md:space-x-[11px] sm:space-x-0 space-x-1">
-                        {buttons.map((button) => (
-                          <button
-                            key={button.id}
-                            onClick={() => handleClickButton(button.id)}
-                            className={`flex items-center xs:h-[40px] sm:h-[40px] h-[48px] 2xl:w-[100%] xl:w-[1000%] xs:w-[100%] sm:w-[100%] md:w-[100%] lg:w-[100%] justify-center max-w-[212px] xs:text-[14px] rounded-[14px] xs:py-1 py-[8px] backdrop-blur transition-all duration-300 ${
-                              activeButton === button.id
-                                ? "bg-white text-black shadow-inner"
-                                : "bg-[#ffffff17] text-white"
-                            }`}
-                          >
-                            <div className="flex flex-col items-center justify-center">
-                              <img
-                                src={button.imgSrc}
-                                className="h-[17px]"
-                                alt={button.label}
-                              />
-                              <p className="text-[14px] xs:text-[10px] font-[Lato] font-[400] mt-[2px] w-[30px]">
-                                {button.label}
-                              </p>
-                            </div>
-                          </button>
-                        ))}
-                      </div> */}
-                            <div className="flex relative z-[9]">
-                              <div className="w-[100%] space-y-[5px]">
-                                <label
-                                  htmlFor=""
-                                  className="text-[#D0D0D0] font-[Lato] text-[16px] xs:text-[14px]"
-                                >
-                                  Amount in {tokenChoice} you pay
-                                </label>
-                                <div className="flex justify-between bg-[#fff] rounded-[6px]">
-                                  <input
-                                    type="text"
-                                    className="bg-[#fff] w-[80%] p-2 rounded-l-[6px] text-[#000] text-[20px] h-[44px] font-[Lato] w-[100%] outline-none rounded-l "
-                                    placeholder="100"
-                                    value={userAmount ? userAmount : ""}
-                                    onChange={(e) => {
-                                      handleUserInput(e);
-                                    }}
-                                  />
-                                  <div className="relative z-[9] inline-block text-left">
-                                    <button
-                                      onClick={handleButtonClick}
-                                      className="h-[44px] flex text-[#fff] text-[12px] font-[400] items-center justify-between p-[7px] !pr-[10px] 2xl:w-[130px] xl:w-[130px] lg:w-[130px] md:w-[130px] sm:w-[130px] w-[105px] h-[42px] border rounded-r-[6px] bg-[#D1D5DB]"
-                                    >
-                                      <div className="flex items-center space-x-[8px]">
-                                        {selectedOption.image && (
-                                          <img
-                                            src={selectedOption.image}
-                                            alt={selectedOption.label}
-                                            className="max-h-[25px] min-h-[22px]"
-                                          />
-                                        )}
-                                        <span className="text-[#000] leading-[100%] text-[14px] xs:text-[10px] font-[700] pt-1 xs:pt-0">
-                                          <span>{selectedOption.label}</span>
-                                        </span>
-                                      </div>
-                                      <img
-                                        src={downarw}
-                                        className=""
-                                        alt="dropdown arrow"
-                                      />
-                                    </button>
-                                    {showDropdown && (
-                                      <div className="absolute right-0 mt-2 w-[130px] backdrop-blur-md bg-[#646464e6] rounded-[12px] shadow-lg">
-                                        {options.map((option) => (
-                                          <div
-                                            key={option.id}
-                                            onClick={() =>
-                                              handleOptionClick(option)
-                                            }
-                                            className="cursor-pointer flex  items-center p-[7px] space-x-[8px] hover:bg-[#737373] rounded-[5px]"
-                                          >
-                                            <div className="flex items-center justify-center min-w-[32px]">
-                                              {option.image && (
-                                                <img
-                                                  src={option.image}
-                                                  alt={option.label}
-                                                  className="max-h-[30px] min-h-[29px]"
-                                                />
-                                              )}
-                                            </div>
-                                            <span className="text-[#fff] text-[14px] font-[500]">
-                                              {option.label}
-                                            </span>
-                                          </div>
-                                        ))}
-                                      </div>
-                                    )}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="flex relative z-[1]">
-                              <div className="w-[100%] space-y-[5px]">
-                                <label
-                                  htmlFor=""
-                                  className="text-[#D0D0D0] font-[Lato] text-[16px] xs:text-[14px]"
-                                >
-                                  {t("ProductDetails.card-body-amount-receive")}{" "}
-                                  <span className="text-[#FFD02F] font-[800] underline">
-                                    <a href={"#membership"} className="">
-                                      <span className="text-[#FFD02F] font-bold underline">
-                                        {userUSD / currentDcarsPrice >= 1000 &&
-                                        userUSD / currentDcarsPrice < 5000
-                                          ? "Mercedes NFT"
-                                          : userUSD / currentDcarsPrice >=
-                                              5000 &&
-                                            userUSD / currentDcarsPrice < 10000
-                                          ? "Porsche NFT"
-                                          : userUSD / currentDcarsPrice >=
-                                              10000 &&
-                                            userUSD / currentDcarsPrice < 25000
-                                          ? "Bentley NFT"
-                                          : userUSD / currentDcarsPrice >=
-                                              21000 &&
-                                            userUSD / currentDcarsPrice < 100000
-                                          ? "Ferrari NFT"
-                                          : userUSD / currentDcarsPrice >=
-                                            100000
-                                          ? "Lamborghini NFT"
-                                          : ""}
-                                      </span>
-                                    </a>
-                                  </span>
-                                </label>
-                                <div className="flex items-center justify-between bg-[#fff] rounded-[6px]">
-                                  <input
-                                    type="text"
-                                    className="text-[#000] p-2 text-[20px] h-[44px] bg-[#fff] font-[Lato] 2xl:w-[70%] xl:w-[70%] lg:w-[70%] md:w-[70%] sm:w-[70%] w-[70%] outline-none rounded-l-[6px] "
-                                    placeholder="58.823"
-                                    value={
-                                      userUSD
-                                        ? userUSD.toLocaleString("en-US", {
-                                            minimumFractionDigits: 2,
-                                            maximumFractionDigits: 2,
-                                          })
-                                        : ""
-                                    }
-                                    onChange={(e) => {
-                                      handleDcarsInput(e);
-                                    }}
-                                  />
-                                  <button className="flex text-[16px] xs:text-[10px] font-[700] items-center px-2 space-x-[8px] 2xl:w-[130px] xl:w-[130px] lg:w-[130px] md:w-[130px] sm:w-[130px] w-[105px] h-[44px] text-[#000] rounded-r-[6px] bg-[#D1D5DB]">
-                                    <img
-                                      src={Loinp}
-                                      className="h-[32px] xs:w-[35px] xs:h-[35px] mr-2 xs:mr-1"
-                                      alt=""
-                                    />
-                                    $DCARS
-                                  </button>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="w-[100%] relative z-[1] pt-[15px] xs:pt-[20px]">
-                              <ConnectButton.Custom>
-                                {({
-                                  account,
-                                  chain,
-                                  authenticationStatus,
-                                  mounted,
-                                }) => {
-                                  const ready =
-                                    mounted &&
-                                    authenticationStatus !== "loading";
-                                  const connected =
-                                    ready &&
-                                    account &&
-                                    chain &&
-                                    (!authenticationStatus ||
-                                      authenticationStatus === "authenticated");
-                                  if (chain) setCurrentChain(chain.name);
-                                  return (
-                                    <div
-                                      {...(!ready && {
-                                        "aria-hidden": true,
-                                        style: {
-                                          opacity: 0,
-                                          pointerEvents: "none",
-                                          userSelect: "none",
-                                        },
-                                      })}
-                                    >
-                                      {(() => {
-                                        if (!connected) {
-                                          return (
-                                            <button
-                                              className="bgcolor ftbutton2 font-[700] font-[Lato] w-[100%] h-[42px] rounded-[5px] text-[18px]"
-                                              onClick={openConnectModal}
-                                            >
-                                              {" "}
-                                              {t(
-                                                "ProductDetails.card-body-walletBtn"
-                                              )}
-                                            </button>
-                                          );
-                                        }
-
-                                        if (chain.unsupported) {
-                                          return (
-                                            <button
-                                              onClick={openChainModal}
-                                              type="button"
-                                            >
-                                              Wrong network
-                                            </button>
-                                          );
-                                        }
-
-                                        setUserAddress(account.address);
-                                        return (
-                                          <div>
-                                            <button
-                                              className="bgcolor font-[700] font-[Lato] w-[100%] h-[42px] rounded-[5px] text-[16px]"
-                                              type="button"
-                                              onClick={() => handleBuyToken()}
-                                            >
-                                              {buynowbtn}
-                                            </button>
-                                          </div>
-                                        );
-                                      })()}
-                                    </div>
-                                );
-                            }}
-                        </ConnectButton.Custom>
-                      </div>
-                      {show && (
-                        <div className="flex relative z-[1]">
-                          <input
-                            type="text"
-                            className="h-[44px] w-[100%] px-2 outline-none rounded-l"
-                            placeholder="Bonus code" onChange={(e) => {
-                                setCoupon(e.target.value.toLowerCase())
-                            }}
-                          />
-                          <button className="flex h-[44px] items-center text-white rounded-r space-y-3 px-5   bg-black"  onClick={handleCoupon}>
-                            <p className="text-[12px] text-whites font-[700]">
-                              {t("ProductDetails.card-body-Bonus-code-apply")}
-                            </p>
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-                <div className="max-w-[733px] pb-[1rem] w-[100%] mx-auto">
-                  <div className=" flex justify-between relative z-[1] space-x-[15px] xs:pt-[0.5rem]">
-                    <a
-                      href="#how-to-buy"
-                      onClick={handleLinkClick}
-                      data-offset="100"
-                      className="cursor-pointer border border-[#DDD] text-[14px] xs:text-[11px] font-[500]  leading-[21px] flex w-[100%] max-w-[356.62px] h-[40px] items-center justify-center text-white font-[Lato] rounded-[10px] bg-[#323232]"
-                    >
-                      {" "}
-                      <img
-                        className="pr-[10px] w-[25px] h-[25px]"
-                        src={que}
-                        alt=""
-                      />{" "}
-                      {t("ProductDetails.card-body-buyBtn")}
-                    </a>
-                    
-                    {!userAddress ?
-                      <button
-                          onClick={openConnectModal}
-                      className="cursor-pointer border border-[#DDD] text-[14px] xs:text-[11px] font-[500] font-[Lato] leading-[21px] flex w-[100%] max-w-[356.62px] h-[40px] items-center justify-center text-white  rounded-[10px] bg-[#323232]"
-                      >
-                          {" "}
-                          <img
-                        className="pr-[10px] w-[25px] h-[25px]"
-                              src={refe}
-                              alt=""
-                          />
-                          {t("ProductDetails.card-body-referralBtn")}
-                      </button> :
-
-                      <button
-                          onClick={handleCopy}
-                      className="cursor-pointer border border-[#DDD] text-[14px] xs:text-[11px] font-[500] font-[Lato] leading-[21px] flex w-[100%] max-w-[356.62px] h-[40px] items-center justify-center text-white  rounded-[10px] bg-[#323232]"
-                      >
-                          {" "}
-                          <img
-                        className="pr-[10px] w-[25px] h-[25px]"
-                              src={refe}
-                              alt=""
-                          />
-                          {t("ProductDetails.card-body-referralBtn")}
-                      </button>
-                      
-                      }
-                  </div>
-                </div>
-                
-                {!show && (
-                  <div className="pb-[18px] relative z-[1]">
-                    <p
-                      onClick={handelBonus}
-                      className="cursor-pointer text-[#DDD] underline text-center  text-[16px] font-[500] leading-[7px]"
-                    >
-                      {t("ProductDetails.card-body-Bonus-code")}
-                    </p>
-                  </div>
-                )}
-              </div>
-            </div>
-            <div className="max-w-[894px] mt-[25px] mx-auto w-[100%] flex items-center py-[0px] xs:!pt-[0px] justify-between space-x-[1rem]">
-              <div className="w-[518px] h-[50px] xs:h-[40px] relative z-[9] flex justify-center items-center gradient-border-mask-own-last backdrop-blur-md bg-[#5555556e] xs:bg-[#ffffff08]">
-                <a
-                  href="https://github.com/solidproof/projects/blob/main/2024/Dreamcars/EVM_Audit_SolidProof_Dreamcars.pdf"
-                  target="_blank"
-                  className="relative z-[20] 2xl:text-[18px]  xl:text-[18px] lg:text-[18px] md:text-[18px] sm:text-[16.871px]  text-[11px]  text-white underline font-[Lato]" rel="noreferrer"
-                >
-                  {t("ProductDetails.para3last")}
-                </a>
-              </div>
-              <div className="w-[100%] max-w-[345.254px] h-[50px] xs:h-[40px] relative z-[9] flex justify-center items-center gradient-border-mask-own-last backdrop-blur-md bg-[#5555556e] xs:bg-[#ffffff08]">
-                <img className="max-h-[40px] xs:h-[28px]" src={Solid} alt="" />
-              </div>
-            </div>
-            
-          </div>
+         </div>
+        
         </div>
-        <div className="px-[23px]  py-[10px] !mt-[15px] relative z-[9] gradient-border-mask-own-hero-cent backdrop-blur-md bg-[#ffffff08] flex justify-between max-w-[894px] mx-auto ">
-          <h4 className="text-[18px] xs:text-[9px] font-[700] w-[378px] mx-auto text-[#fff] self-center">
-          Share Dreamcars with Friends
-          </h4>
-          <div className="flex justify-end space-x-[10px] xs:space-x-[5px] ">
-            <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] relative z-[9] flex justify-center items-center gradient-border-mask-no-blur-button overflow-hidden hidden xs:flex">
-              <a
-                href="#"
-                target=""
-                rel="noopener noreferrer"
-                className="relative z-[20]"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleShare();
-                }}
-              >
-                <img src={sharelogo} className="h-[22px] xs:h-[18px] w-[22px] xs:w-[18px] text-white cursor-pointer" />
-              </a>
-            </div>
-            <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] relative z-[9] flex justify-center items-center overflow-hidden gradient-border-mask-no-blur-button">
-              <a
-                href="#"
-                target=""
-                rel="noopener noreferrer"
-                className="relative z-[20]"
-                onClick={(e) => {
-                  e.preventDefault();
-                  copyUrlToClipboard();
-                }}
-              >
-                <FaLink className="h-[22px] xs:h-[15px] w-[22px] xs:w-[20px] text-white cursor-pointer" />
-              </a>
-            </div>
-            <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] flex justify-center items-center gradient-border-mask-no-blur-button overflow-hidden">
-              <a
-                href="https://twitter.com/dreamcars_bsc"
-                target="_blank"
-                className="cursor-pointer relative z-[20]"
-                rel="noopener noreferrer"
-              >
-                <FaTwitter className="h-[22px] xs:h-[15px] w-[22px] xs:w-[20px] text-white cursor-pointer" />
-              </a>
-            </div>
-            <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] flex justify-center items-center gradient-border-mask-no-blur-button overflow-hidden">
-              <a
-                href="https://t.me/Dreamcars_bsc"
-                target="_blank"
-                className="relative z-[20] cursor-pointer"
-                rel="noopener noreferrer"
-              >
-                <BsFillSendFill className="h-[22px] xs:h-[15px] w-[22px] xs:w-[20px] text-white cursor-pointer" />
-              </a>
-            </div>
-
-                  <div className="w-[58px] h-[41px] xs:w-[24px] xs:h-[24px] flex justify-center items-center gradient-border-mask-no-blur-button">
-                    <a
-                      href="https://www.instagram.com/dreamcars_bsc/"
-                      className="relative z-[20] cursor-pointer"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <FaInstagram className="h-[22px] xs:h-[15px] w-[22px] xs:w-[20px] text-white cursor-pointer" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
+      )}
+    </div>
+    <div
+    >
+      <BuyWidget handleClose={handleClose} />
           </div>
         </div>
       </div>
-
-      {/* Wallet Dialog */}
+      
       {showWalletDialog && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 w-full max-w-md">

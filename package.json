@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@akamfoad/qrcode": "^0.3.2",
     "@coinbase/wallet-sdk": "^4.3.7",
     "@headlessui/react": "^1.7.13",
     "@metamask/sdk": "^0.33.1",
@@ -17,6 +18,7 @@
     "@wagmi/connectors": "5.7.11",
     "@wagmi/core": "^2.21.0",
     "axios": "^1.7.7",
+    "clsx": "^2.1.1",
     "i18next": "^22.4.13",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.4.2",

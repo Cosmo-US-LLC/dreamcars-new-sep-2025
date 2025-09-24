@@ -86,9 +86,8 @@ const DreamcarsOpenSec = () => {
                 modules={[Navigation, Pagination, Keyboard]}
               >
                 {items.map((item) => (
-                  <SwiperSlide >
+                  <SwiperSlide key={item.id}>
                     <div
-                      key={item.id}
                       className={`${item.bgClass} pt-[25px] px-[30px] pb-[20px] w-[100%] max-w-[364px] rounded-[10px] min-h-[491px] flex justify-between flex-col`}
                     >
                       <h4 className="text-[36px] font-[700] text-[#fff] textshad max-w-[200px] w-[100%] leading-[130%]">{item.city}</h4>

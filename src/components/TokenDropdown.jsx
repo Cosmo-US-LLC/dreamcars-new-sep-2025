@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useMemo } from "react";
 import { tokenImageMap } from "../presale-gg/assets/img/tokens";
+import clsx from "clsx";
 /**
  * @typedef {import("../presale-gg/api/api.types").API.PaymentToken} PaymentToken
  */
@@ -13,8 +14,9 @@ import { tokenImageMap } from "../presale-gg/assets/img/tokens";
  * @param {string} [props.placeholder]
  * @param {PaymentToken | null} [props.defaultToken]
  * @param {boolean} props.selected
+ * @param {"default" | "contrast"} props.variant
  */
-export default function TokenSelectDropdown({ tokens, onChange, selectedToken, selected, defaultLabel, defaultToken, placeholder }) {
+export default function TokenSelectDropdown({ tokens, onChange, variant = 'default', selectedToken, selected, defaultLabel, defaultToken, placeholder, ...others }) {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -50,30 +52,33 @@ export default function TokenSelectDropdown({ tokens, onChange, selectedToken, s
     };
   }, []);
 
+  const textCol = variant === "default" ? "text-[#fff]" : "text-[#000]"
+  const textSize = variant === "default" ? "text-[12px]" : "text-[16px] xs:text-[12px]"
+  const textSizeSm = variant === "default" ? "text-[9px]" : "text-[12px] xs:text-[9px]"
+  const imgSize = variant === "default" ? "h-[20px] w-[20px]" : "h-[28px] w-[28px] xs:h-[32px] xs:w-[32px]"
+
   return (
-    <div className="relative w-[100%]" ref={dropdownRef}>
+    <div {...others} className={clsx("relative", others.classNameName)} ref={dropdownRef}>
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center justify-between w-full px-2 h-[44px] rounded-[8px] cursor-pointer"
-        style={{ background: "rgba(255, 255, 255, 0.20)" }}
+        className={clsx("flex items-center justify-between w-full px-2 h-[44px] rounded-[8px] cursor-pointer", {"outline-2 outline-[#FFD02F]": selected})}
+        style={{ background: "rgba(255, 255, 255, 0.20)", outlineStyle: selected ? "solid" : "none" }}
       >
-        <span className="flex items-center 2xl:gap-2 xl:gap-2 lg:gap-2 md:gap-2 sm:gap-[5px] gap-[4px] text-[11.7px] font-[700] font-[Inter]">
-          <div className="min-w-[20px]">
+        <span className={`flex items-center 2xl:gap-2 xl:gap-2 lg:gap-2 md:gap-2 sm:gap-[5px] gap-[4px] ${textSize} font-[700]`}>
             {img && (
               <img
                 src={img}
                 alt=''
-                className="2xl:max-h-[20px] xl:max-h-[20px] lg:max-h-[20px] md:max-h-[20px] sm:max-h-[16px] max-h-[16px]"
+                className={`${imgSize}`}
               />
             )}
-          </div>
           <span
-            className={`leading-[10px] text-[#fff] text-start`}
+            className={`leading-[0.8] ${textCol} text-start`}
           >
             {text}
             <br />
             {selectedToken?.chain && (
-              <span className="text-[9px] text-[#fff] leading-[8px] font-[400]">
+              <span className={`${textSizeSm} ${textCol} leading-[8px] font-[400]`}>
                 {selectedToken.chain}
               </span>
             )}
@@ -97,7 +102,7 @@ export default function TokenSelectDropdown({ tokens, onChange, selectedToken, s
 
       {open && (
         <div
-          className="absolute left-0 max-h-[250px] overflow-y-scroll mt-1 w-full border border-gray-300 rounded-md shadow-md z-10 overflow-hidden"
+          className="absolute top-full left-0 mt-1 w-full border border-gray-300 rounded-md shadow-md z-10 overflow-y-auto max-h-[250px]"
           style={{
             background: "#929292ff",
             backdropFilter: "blur(5px)",
@@ -107,13 +112,23 @@ export default function TokenSelectDropdown({ tokens, onChange, selectedToken, s
             <button
               key={token.id}
               onClick={() => handleSelect(token)}
-              className="flex items-center text-[#fff] gap-x-2 w-full px-3 py-2 text-[11.7px] font-[700] font-[Inter] text-left hover:bg-[#8a8a8aff] bg-[#929292ff]"
-             
+              className="flex items-center text-[#fff] gap-2 w-full px-3 py-2 text-[11.7px] font-[700] text-left hover:bg-gray-100/80"
+              style={{
+                background: "rgba(201, 187, 187, 0.47)",
+              }}
             >
               {tokenImageMap[token.symbol.toLowerCase()] && (
                 <img src={tokenImageMap[token.symbol.toLowerCase()]} alt="" className="max-h-[20px]" />
               )}
-              {token.symbol.toUpperCase()}
+              <p className="leading-[1.1]">
+                {token.symbol.toUpperCase()}
+                <br />
+                {token?.chain && (
+                  <span className="text-[9px] text-[#fff] leading-[8px] font-[400]">
+                    {token.chain}
+                  </span>
+                )}
+              </p>
             </button>
           ))}
         </div>

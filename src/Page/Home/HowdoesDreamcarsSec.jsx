@@ -124,9 +124,8 @@ const HowdoesDreamcarsSec = () => {
                 modules={[Navigation, Pagination, Keyboard]}
               >
                 {howDoseData.map((item) => (
-                  <SwiperSlide >
+                  <SwiperSlide key={item.id}>
                     <div
-                      key={item.id}
                       onClick={() => setActiveId(item.id)}
                       className={`flex items-center h-[210px] backdrop-blur-md gradient-border-mask rounded-[34px] px-[22px] py-[18px]  space-x-[20px] cursor-pointer ${activeId === item.id
                           ? "bg-[#0000008c]"

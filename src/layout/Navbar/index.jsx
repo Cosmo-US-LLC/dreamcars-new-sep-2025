@@ -192,7 +192,7 @@ const Navbar = ({ handleClose, open }) => {
   return (
     <div className="relative bg-[#0D0904]">
 
-      <header class="w-full header xs:fixed xs:bottom-0 bg-[#0A40A0] text-black items-center md:block sm:block xs:block text-center py-2">
+      <header className="w-full header xs:fixed xs:bottom-0 bg-[#0A40A0] text-black items-center md:block sm:block xs:block text-center py-2">
         {
           distance > 0 ?
 
@@ -289,7 +289,7 @@ const Navbar = ({ handleClose, open }) => {
                   onClick={handleLangDropdown}
                   id="dropdownDefaultButton"
                   data-dropdown-toggle="dropdown"
-                  class="text-white font-medium rounded-lg text-sm w-[full] h-[41px]  py-2.5 text-center inline-flex items-center px-2"
+                  className="text-white font-medium rounded-lg text-sm w-[full] h-[41px]  py-2.5 text-center inline-flex items-center px-2"
                   style={{}}
                   type="button"
                 >
@@ -306,9 +306,9 @@ const Navbar = ({ handleClose, open }) => {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M19 9l-7 7-7-7"
                     ></path>
                   </svg>
@@ -452,9 +452,9 @@ const Navbar = ({ handleClose, open }) => {
               stroke="currentColor"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M4 6h16M4 12h16M4 18h16"
                 fill="white"
               />
@@ -521,7 +521,7 @@ const Navbar = ({ handleClose, open }) => {
                     onClick={handleLangDropdown}
                     id="dropdownDefaultButton"
                     data-dropdown-toggle="dropdown"
-                    class="text-white font-medium rounded-lg text-sm w-[full]  py-2.5 text-center inline-flex items-center "
+                    className="text-white font-medium rounded-lg text-sm w-[full]  py-2.5 text-center inline-flex items-center "
                     style={{}}
                     type="button"
                   >
@@ -537,9 +537,9 @@ const Navbar = ({ handleClose, open }) => {
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="M19 9l-7 7-7-7"
                       ></path>
                     </svg>

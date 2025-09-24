@@ -51,8 +51,8 @@ const WhyShouldSection = () => {
                                                 </div>
                                                 <div className="2xl:flex xl:flex lg:flex md:flex sm:block block 2xl:space-x-[1.5rem] xl:space-x-[1.5rem] lg:space-x-[1.5rem] md:space-x-[1.5rem] sm:space-x-[0rem] space-x-[0rem] 2xl:space-y-[0rem] xl:space-y-[0rem] lg:space-y-[0rem] md:space-y-[0rem] sm:space-y-[1rem] space-y-[1rem] justify-center 2xl:px-[0rem] xl:px-[0rem] lg:px-[0rem] md:px-[0rem] sm:px-[2rem] px-[2rem]">
                                                         {
-                                                                WhyShouldData.map((item) => (
-                                                                        <div className="w-[100%] 2xl:space-y-[25px] xl:space-y-[25px] lg:space-y-[25px] md:space-y-[25px] sm:space-y-[35px] space-y-[35px]  flex flex-col items-center 2xl:rounded-[37px] xl:rounded-[37px] lg:rounded-[37px] md:rounded-[37px] sm:rounded-[18px] rounded-[18px]  py-6 2xl:px-6 xl:px-6 lg:px-6 md:px-6 sm:px-4 px-4 gradient-border-mask-no-blur">
+                                                                WhyShouldData.map((item, i) => (
+                                                                        <div key={i} className="w-[100%] 2xl:space-y-[25px] xl:space-y-[25px] lg:space-y-[25px] md:space-y-[25px] sm:space-y-[35px] space-y-[35px]  flex flex-col items-center 2xl:rounded-[37px] xl:rounded-[37px] lg:rounded-[37px] md:rounded-[37px] sm:rounded-[18px] rounded-[18px]  py-6 2xl:px-6 xl:px-6 lg:px-6 md:px-6 sm:px-4 px-4 gradient-border-mask-no-blur">
                                                                                 <div className="space-y-[15px]">
                                                                                         <h4
                                                                                                 className="text-center leading-[120%] text-[#fff] text-[26px] font-[600]"

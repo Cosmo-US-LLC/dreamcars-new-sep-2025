@@ -17,21 +17,21 @@ import { getIsMobile } from "../util";
  * @property {() => boolean} [onClick]
  */
 
-/** @type {Promise<import("./connections")> | undefined} */
+/** @type {Promise<import("../../wagmi/config")> | undefined} */
 let configPromise = undefined;
 
 /**
  * @typedef {object} ConfigRef
- * @property {Promise<import("./connections")> | undefined} ConfigRef.current
+ * @property {Promise<import("../../wagmi/config")> | undefined} ConfigRef.current
  */
 
 /** @type {ConfigRef} */
 export let configRef = { current: undefined };
 
-/** @returns {Promise<import("./connections")>} */
+/** @returns {Promise<import("../../wagmi/config")>} */
 export const getConfig = async () => {
   if (configRef.current) return configRef.current;
-  if (!configPromise) configPromise = import("./connections");
+  if (!configPromise) configPromise = import("../../wagmi/config");
   const res = await configPromise;
   configRef.current = res;
   document.dispatchEvent(new Event("wagmi-loaded"));
@@ -60,58 +60,3 @@ export const getPublicClient = async (chainId) => {
   getPublicClientRef.current = res.getPublicClient;
   return res.getPublicClient(chainId);
 };
-
-/**
- * @type {Connection[]}
- */
-export const connections = [
-  {
-    label: "Metamask",
-    key: "metamask",
-    icon: metamaskImg,
-    connectorIndex: 0,
-    hide: () => !window.ethereum || !window.ethereum.isMetaMask,
-  },
-  {
-    label: "Wallet Connect",
-    key: "walletconnect",
-    icon: walletConnectImg,
-    connectorIndex: 1,
-  },
-  {
-    label: "Coinbase",
-    key: "coinbase",
-    icon: coinbaseImg,
-    connectorIndex: 2,
-  },
-  {
-    label: "Phantom Wallet",
-    key: "phantom-wallet",
-    icon: phantomWalletImg,
-    connectorIndex: 3,
-    hide: () =>
-      typeof window === "undefined" ||
-      (!("phantom" in window) && !getIsMobile()),
-    onClick: !("phantom" in window)
-      ? () => {
-          const url = new URL(window.location.href);
-          let newUrl = `${url.origin}${url.pathname}`;
-          newUrl += "?" + url.searchParams.toString();
-          if (url.search) newUrl += "&";
-          newUrl += `connect_wallet=${encodeURIComponent("phantom-wallet")}`;
-          window.open(
-            `https://phantom.app/ul/browse/${encodeURIComponent(
-              newUrl
-            )}?ref=${encodeURIComponent(window.location.href)}`,
-            "_blank"
-          );
-        }
-      : undefined,
-  },
-];
-
-if (localStorage.getItem("connect-wallet-id-v2")) {
-  getConfig().then(({ loadStoredConnection }) => {
-    loadStoredConnection();
-  });
-}

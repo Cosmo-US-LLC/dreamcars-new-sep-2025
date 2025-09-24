@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Layout from './layout';
 import i18n from 'i18next';
 import { ToastContainer } from 'react-toastify';
+import { Toaster } from "react-hot-toast"
 
 import Parse from 'parse';
 import { fetchApiData } from "./presale-gg/stores/api.store";
@@ -33,7 +34,6 @@ function App() {
   }
 
   useEffect(() => {
-    console.log("LOADED APP")
     fetchApiData()
     addUserListener()
   }, [])
@@ -41,6 +41,7 @@ function App() {
   return (
     <div className="">
       <ToastContainer />
+      <Toaster toastOptions={{position: "bottom-center"}} />
       <Layout handelClick={handelClick} handleClose={handleClose} open={open} />
     </div>
   );

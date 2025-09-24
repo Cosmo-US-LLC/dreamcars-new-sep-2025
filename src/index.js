@@ -7,13 +7,9 @@ import "./i18n";
 import Loader from './components/Loader';
 
 import '@rainbow-me/rainbowkit/styles.css';
-import { phantomWallet } from '@rainbow-me/rainbowkit/wallets';
-import { metaMaskWallet } from '@rainbow-me/rainbowkit/wallets';
 // import { mainnet, bsc } from 'wagmi/chains';
 
-import { Theme } from '@rainbow-me/rainbowkit';
 import {
-  getDefaultConfig,
   RainbowKitProvider,
 } from '@rainbow-me/rainbowkit';
 import { WagmiProvider } from 'wagmi';
@@ -21,41 +17,9 @@ import {
   QueryClientProvider,
   QueryClient,
 } from "@tanstack/react-query";
-import { connectorsForWallets } from '@rainbow-me/rainbowkit';
-import {
-  rainbowWallet,
-  trustWallet,
-  walletConnectWallet,
-} from '@rainbow-me/rainbowkit/wallets';
+import { config } from './wagmi/config';
 
-
-const eth = {
-  id: 1,
-  name: 'Ethereum',
-  iconUrl: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png',
-  iconBackground: '#fff',
-  nativeCurrency: { name: 'Ethereum', symbol: 'ETH', decimals: 18 },
-  rpcUrls: {
-    default: { http: ['https://mainnet.infura.io/v3/e8eed4cda42f4818b904965ede803e30'] },
-  },
-  blockExplorers: {
-    default: { name: 'Etherscan', url: 'https://etherscan.io/' },
-  },
-}
-const bsc = {
-  id: 56,
-  name: 'Binance Smart Chain',
-  iconUrl: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1839.png',
-  iconBackground: '#fff',
-  nativeCurrency: { name: 'Binance Smart Chain', symbol: 'BNB', decimals: 18 },
-  rpcUrls: {
-    default: { http: ['https://bsc-mainnet.infura.io/v3/e8eed4cda42f4818b904965ede803e30'] },
-  },
-  blockExplorers: {
-    default: { name: 'BSCScan', url: 'https://bscscan.com/' },
-  },
-}
-const myCustomTheme: Theme = {
+const myCustomTheme = {
   blurs: {
     modalOverlay: '...',
   },
@@ -64,29 +28,8 @@ const myCustomTheme: Theme = {
     modalBackground: '#fff',
   }
 };
-const connectors = connectorsForWallets(
-  [
-    {
-      groupName: 'Suggested',
-      wallets: [
-        rainbowWallet,
-        trustWallet,
-        walletConnectWallet,
-        metaMaskWallet,
-        phantomWallet
-      ],
-    },
-  ],
-  { appName: 'DreamCars', projectId: 'f1fa989b52589ea5a9f742a48081a6f4' },
-);
-const projectId = 'f1fa989b52589ea5a9f742a48081a6f4';
-const config = getDefaultConfig({
-  connectors,
-  appName: 'DreamCars',
-  projectId: 'f1fa989b52589ea5a9f742a48081a6f4',
-  chains: [eth, bsc],
-  ssr: true,
-});
+
+
 const queryClient = new QueryClient();
 
 const DelayedSuspense = ({ children, delay = 100 }) => {

@@ -61,7 +61,7 @@ const FeaturedSection = () => {
                     <div className=" mx-auto px-4 xs:px- pt-5 grid grid-cols-4 lg:grid-cols-4 md:grid-cols-4 gap-2 xs:grid-cols-4 sm:grid-cols-4 ">
                         {
                             imgData.map((item, id) => (
-                                <img className="w-[auto] h-[auto] 2xl:max-h-[50px] xl:max-h-[50px] lg:max-h-[50px] md:max-h-[50px] sm:max-h-[50px] max-h-[30px] mx-auto xs:h-[auto]" src={item.imgName} alt="" />
+                                <img key={id} className="w-[auto] h-[auto] 2xl:max-h-[50px] xl:max-h-[50px] lg:max-h-[50px] md:max-h-[50px] sm:max-h-[50px] max-h-[30px] mx-auto xs:h-[auto]" src={item.imgName} alt="" />
                             ))
                         }
 
@@ -69,7 +69,7 @@ const FeaturedSection = () => {
                     <div className="mx-auto px-4 xs:px-0 pt-5 grid grid-cols-3 lg:grid-cols-3 md:grid-cols-3 gap-2 xs:grid-cols-3 sm:grid-cols-3 items-end">
                         {
                             imgData2.map((item, id) => (
-                                <img className="w-[auto] max-h-[50px] mx-auto h-[auto] xs:h-[auto]" src={item.imgName} alt="" />
+                                <img key={id} className="w-[auto] max-h-[50px] mx-auto h-[auto] xs:h-[auto]" src={item.imgName} alt="" />
                             ))
                         }
 

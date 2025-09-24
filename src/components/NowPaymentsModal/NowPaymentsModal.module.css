@@ -1,0 +1,155 @@
+.transaction-modal {
+  max-width: 30rem;
+  border-radius: 0.5rem;
+}
+
+.payment-status {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+  transition: color 200ms ease-out;
+}
+
+.status-text-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+}
+
+.status-paid .payment-status {
+  color: #22c55e;
+}
+
+.status-expired .payment-status {
+  color: #ff3333;
+}
+
+.status-label {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+  color: var(--status-col);
+}
+
+.status-label svg {
+  width: 1em;
+  height: 1em;
+  stroke: var(--status-col);
+}
+
+.status-time {
+  color: var(--theme-text-secondary);
+}
+
+.status-bar {
+  position: relative;
+  width: 100%;
+  height: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 999rem;
+  overflow: hidden;
+}
+
+.status-bar::after {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--status-col);
+  border-radius: 999rem;
+  transition: width 200ms ease-out;
+}
+
+.status-unpaid .status-bar::after {
+  width: calc(var(--frac) * 100%);
+}
+
+.payment-details {
+  display: flex;
+  gap: 1rem;
+  height: fit-content;
+  align-items: center;
+}
+
+.qr {
+  border-radius: 0.5rem;
+  width: 9.75rem;
+  height: 9.75rem;
+  padding: 0;
+  border: 3px solid #000;
+}
+
+.number-value {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.number-value-label {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.input-container {
+  display: flex;
+  gap: 0.5rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  height: 2.5rem;
+}
+
+.input {
+  flex: 1;
+  width: 0;
+  background-color: transparent !important;
+  padding: 0.25rem;
+  padding-left: 0.5rem;
+  color: #000;
+}
+
+.copy-button {
+  width: 3.5rem;
+  height: 2rem;
+  background-color: #000;
+  margin-block: auto;
+  margin-right: 0.25rem;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.payment-values {
+  display: flex;
+  flex-direction: column;
+  width: 25rem;
+  gap: 1rem;
+  flex: 1;
+}
+
+.hint-text {
+  font-weight: 400;
+  font-size: 1rem;
+  color: var(--theme-text-secondary);
+  font-size: 0.875rem;
+}
+
+.bold {
+  font-weight: 700;
+  color: var(--theme-text-primary);
+}
+
+@media (max-width: 500px) {
+  .payment-details {
+    flex-direction: column;
+    align-items: center;
+  }
+  .payment-values {
+    width: auto;
+    align-self: stretch;
+  }
+}

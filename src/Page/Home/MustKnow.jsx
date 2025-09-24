@@ -68,8 +68,8 @@ const MustKnowSection = () => {
         <div className="2xl:flex xl:flex lg:flex md:flex sm:block block justify-between relative xs:space-y-[30px]">
           <div className="2xl:w-[53%] xl:w-[53%] lg:w-[53%] md:w-[53%] sm:w-[100%] w-[100%]">
             <div className="grid 2xl:grid-cols-2 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-1 grid-cols-1 gap-[20px]">
-              {muchKnoeData.map((item) => (
-                <>
+              {muchKnoeData.map((item, i) => (
+                <React.Fragment key={i}>
                   <div className="backdrop-blur-md gradient-border-mask rounded-[34px] bg-[#d1d5db1f] px-8 py-[14px] space-y-[7px] min-h-[181px]">
                     <div className="flex space-x-2 items-center">
                       <img
@@ -85,7 +85,7 @@ const MustKnowSection = () => {
                       {t(item.para)}
                     </p>
                   </div>
-                </>
+                </React.Fragment>
               ))}
             </div>
           </div>

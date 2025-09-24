@@ -89,6 +89,7 @@ export const formatPrecision = (num, minDecimals = minDecimalPlaces, maxPrecisio
 		}
 	}
 
+	if (numStr.endsWith(".")) return numStr.split(".")[0]
 	return numStr
 }
 

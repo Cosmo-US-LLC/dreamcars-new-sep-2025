@@ -39,6 +39,10 @@ import Parse from 'parse';
 
 
 import { mainnet, bsc } from 'wagmi/chains'
+import { useApiState } from "../presale-gg/stores/api.store";
+import { useUserState } from "../presale-gg/stores/user.store";
+import { formatNumber, parseNum } from "../presale-gg/util";
+import { LAUNCH_PRICE } from "../constants";
 const PersonaldashData = [
   {
     id: 1,
@@ -71,7 +75,7 @@ function PersonalDashboard({ accounts, handleClose }) {
   const handleCopy = () => {
     navigator.clipboard.writeText("https://dreamcars.co/")
       .then(() => {
-        let link = window.location.origin + "/?ref=" + accounts + "&lang=" + i18n.language
+        let link = window.location.origin + "/?referral_code=" + userData.user?.referral_code + "&lang=" + i18n.language
         navigator.clipboard.writeText(link);
         toast.success('Copied!');
       })
@@ -367,54 +371,9 @@ function PersonalDashboard({ accounts, handleClose }) {
 
   })
 
+  const apiData = useApiState()
+  const userData = useUserState()
 
-  const fetchData = async () => {
-      try {
-          const query = new Parse.Query("Transaction_cd7191_BSC");
-          const query2 = new Parse.Query("Transaction_cd7191_ETH");
-
-          // Set constraints to find records for this wallet address
-          query.equalTo("contributor", accounts.toLowerCase());
-          query2.equalTo("contributor", accounts.toLowerCase());
-
-          // Fetch all matching records
-          const bscTransactions = await query.find();
-          const ethTransactions = await query2.find();
-
-          console.log(bscTransactions, ethTransactions, "transactions")
-          // Calculate totals
-          let totalContrib = 0;
-          let totalTokens = 0;
-          let totalBonus = 0;
-
-          // Sum up BSC transactions
-          bscTransactions.forEach(tx => {
-              totalContrib += tx.get("amountInUSD") || 0;
-              totalTokens += tx.get("baseTokens") || 0;
-              totalBonus += tx.get("bonusTokens") || 0;
-          });
-
-          // Sum up ETH transactions
-          ethTransactions.forEach(tx => {
-              totalContrib += tx.get("amountInUSD") || 0;
-              totalTokens += tx.get("baseTokens") || 0;
-              totalBonus += tx.get("bonusTokens") || 0;
-          });
-
-          setTotalContribution(totalContrib);
-          setTokenAwarded(totalTokens);
-          setFinalBonusTokens(totalBonus);
-
-      } catch (error) {
-          console.error("Error fetching data:", error);
-      }
-  };
-
-  useEffect(() => {
-      fetchData()
-  }, [])
-
-  
   useEffect(() => {
     if (totalContribution >= 1000) {
         setNFT(0.1)
@@ -471,7 +430,7 @@ function PersonalDashboard({ accounts, handleClose }) {
         <div className='px-[2rem] py-[0.6rem] mx-[3px] backdrop-blur-md bg-[#d1d5db1f] gradient-border-mask-per-hed rounded-[12px]'>
           <div className='relative z-[9]'>
             <p className='text-[#FFD02F] text-center text-[16px]  font-[900]'>Launch Price</p>
-            <h4 className='text-[16px] text-[#fff] font-[900] text-center'>1 DCARS = $0.03</h4>
+            <h4 className='text-[16px] text-[#fff] font-[900] text-center'>1 DCARS = ${formatNumber(LAUNCH_PRICE, 0, 6)}</h4>
           </div>
         </div>
         <div className='space-y-[10px]'>
@@ -486,7 +445,7 @@ function PersonalDashboard({ accounts, handleClose }) {
                   <h4 className='text-[16px] font-[700] text-[#fff] leading-[120%]'>DCARS</h4>
                 </div>
                 <div>
-                  <p className='text-[#FFD02F] font-[700] text-[16px]'>{tokenAwarded.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                  <p className='text-[#FFD02F] font-[700] text-[16px]'>{formatNumber(parseNum(userData.user?.total_tokens), 0, 2)}</p>
                 </div>
               </div>
 
@@ -508,7 +467,7 @@ function PersonalDashboard({ accounts, handleClose }) {
                   <h4 className='text-[16px] font-[700] text-[#fff] leading-[120%]'>Staking Rewards</h4>
                 </div>
                 <div>
-                  <p className='text-[#FFD02F] font-[700] text-[16px]'>{tokenAwarded > 1000 && stakingRewards ? stakingRewards.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : 0}</p>
+                  <p className='text-[#FFD02F] font-[700] text-[16px]'>{formatNumber(parseNum(userData.userStakeData?.total_earnings))}</p>
                 </div>
               </div>
 

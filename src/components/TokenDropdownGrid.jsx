@@ -31,7 +31,7 @@ const TokenDropdownGrid = (props) => {
 				<TokenSelectDropdown
 					key={index}
 					selectedToken={selectedGroupIndex === index ? props.selectedToken : null}
-					onChange={props.onChange}
+					onChange={props.onTokenChange}
 					defaultLabel={list.defaultLabel}
 					placeholder={list.placeholder}
 					tokens={list.currencies}
