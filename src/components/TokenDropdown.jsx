@@ -58,7 +58,7 @@ export default function TokenSelectDropdown({ tokens, onChange, variant = 'defau
   const imgSize = variant === "default" ? "h-[20px] w-[20px]" : "h-[28px] w-[28px] xs:h-[32px] xs:w-[32px]"
 
   return (
-    <div {...others} className={clsx("relative", others.classNameName)} ref={dropdownRef}>
+    <div {...others} className={clsx("relative", others.className)} ref={dropdownRef}>
       <button
         onClick={() => setOpen(!open)}
         className={clsx("flex items-center justify-between w-full px-2 h-[44px] rounded-[8px] cursor-pointer", {"outline-2 outline-[#FFD02F]": selected})}

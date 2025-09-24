@@ -47,7 +47,7 @@ export const CodeInput = ({ label, appliedText, onApply, onChange, urlKey, ...ot
 
 
   return (
-    <div {...others} className={clsx("flex relative z-[1]", others.classNameName)} ref={ref}>
+    <div {...others} className={clsx("flex relative z-[1]", others.className)} ref={ref}>
       <input
         type="text"
         className={clsx("h-[44px] w-[100%] px-2 outline-none rounded-l", {"text-[#269e3c] font-[500]": appliedText !== null})}
@@ -59,14 +59,14 @@ export const CodeInput = ({ label, appliedText, onApply, onChange, urlKey, ...ot
         readOnly={appliedText !== null}
       />
       <button
-        className={clsx("flex h-[44px] w-[80px] px-0 items-center text-white rounded-r space-y-3 bg-black", {"animate-pulse": hasUrlCode})}
+        className={clsx("flex h-[44px] w-[80px] px-0 items-center justify-center text-white rounded-r space-y-3 bg-black", {"animate-pulse": hasUrlCode})}
         onClick={() => {
           if (appliedText === null) apply()
           else onChange()
         }} 
         style={{"animationIterationCount": "5"}}
       >
-        <p className="text-[12px] text-whites font-[700] text-center">
+        <p className="text-[12px] text-whites font-[700]">
           {appliedText === null ? t("ProductDetails.card-body-Bonus-code-apply") : "Change"}
         </p>
       </button>

@@ -20,7 +20,7 @@ const Modal = ({ open, onClose, title, ...others }) => {
       className={clsx(classes['modal-container'], { [classes["open"]]: open })}
     >
       <div className={classes['modal-backdrop']} onClick={onClose} />
-      <div {...others} className={clsx(classes['modal'], others.classNameName)}>
+      <div {...others} className={clsx(classes['modal'], others.className)}>
         <button aria-label="Close modal" onClick={onClose} className={classes['close-button']}>
           <CloseIcon />
         </button>
