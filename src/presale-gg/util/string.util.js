@@ -18,7 +18,7 @@ export const truncateString = (str, numChars) => {
  */
 export const capitalize = (str) => {
   return str
-    .split(/_+|\s+/g)
+    .split(/_+|-+|\s+/g)
     .map(
       (str) =>
         str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase()

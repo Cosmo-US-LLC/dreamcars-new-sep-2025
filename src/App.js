@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 
 import Layout from './layout';
 import i18n from 'i18next';
@@ -6,8 +6,6 @@ import { ToastContainer } from 'react-toastify';
 import { Toaster } from "react-hot-toast"
 
 import Parse from 'parse';
-import { fetchApiData } from "./presale-gg/stores/api.store";
-import { addUserListener } from "./presale-gg/stores/user.store";
 // Initialize Parse
 Parse.initialize("myAppId");
 Parse.masterKey = "myMasterKey";
@@ -32,11 +30,6 @@ function App() {
     }
     else setOpen(test)
   }
-
-  useEffect(() => {
-    fetchApiData()
-    addUserListener()
-  }, [])
 
   return (
     <div className="">

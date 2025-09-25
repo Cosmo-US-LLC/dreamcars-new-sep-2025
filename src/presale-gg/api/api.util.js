@@ -189,26 +189,10 @@ export const createCardTransaction = (args) => {
  * @param {string} address
  * @param {number} page
  * @param {number} [limit=12]
- * @returns {Promise<AxiosResponse<API.TransactionHistoryItem>>}
+ * @returns {Promise<import("axios").AxiosResponse<import("../api/api.types.d.ts").API.TransactionHistoryItemV2>>}
  */
-export const getTransactionHistory = (address, page, limit = 12) => {
-  return apiFetch(`/projects/${project}/wallet/${address}/transactions`, {
-    params: {
-      page,
-      limit,
-    },
-  });
-};
-
-/**
- * @param {string} project
- * @param {string} address
- * @param {number} page
- * @param {number} [limit=12]
- * @returns {Promise<AxiosResponse<import("../api/api.types.d.ts").API.BonusTransactionHistoryItem[]>>}
- */
-export const getBonusTransactionHistory = (address, page, limit = 12) => {
-  return apiFetch(`/projects/${project}/wallet/${address}/bonus-transactions`, {
+export const getTransactionHistoryV2 = (address, page, limit = 12) => {
+  return apiFetch(`${baseUrl.replace("v1", "v2")}/projects/${project}/wallet/${address}/transactions`, {
     params: {
       page,
       limit,

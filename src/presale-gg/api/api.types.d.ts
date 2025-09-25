@@ -61,6 +61,53 @@ export namespace API {
     identifier: string;
   };
 
+  export type PurchaseTransactionHistoryItemV2 = {
+    created_at: string;
+    id: number;
+    payment_token_amount: string;
+    payment_token_name: string | null;
+    payment_usd_amount: string;
+    project_id: string;
+    record_type: "purchase_transaction";
+    stage_name: string | null;
+    status: API.TransactionHistoryItem["status"] | null;
+    tokens_bought: string | null;
+    transaction_hash: string | null;
+    type: "external" | "blockchain";
+    wallet_address: string;
+  };
+
+  export type ManualTransactionHistoryItemV2 = {
+    authoriser: number;
+    created_at: string;
+    id: number;
+    project_id: string;
+    reason: string;
+    record_type: "manual_transaction";
+    status: API.TransactionHistoryItem["status"] | null;
+    tokens_bought: string;
+    wallet_address: string;
+  };
+
+  export type BonusTransactionHistoryItemV2 = {
+    bonus_token_amount: string;
+    bonus_type: "bonus_code" | "referral" | "referrer";
+    created_at: string;
+    id: number;
+    identifier: string;
+    parent_transaction_hash: string;
+    parent_transaction_id: string;
+    project_id: string;
+    record_type: "bonus_transaction";
+    wallet_address: string;
+    status: undefined;
+  };
+
+  export type TransactionHistoryItemV2 =
+    | PurchaseTransactionHistoryItemV2
+    | ManualTransactionHistoryItemV2
+    | BonusTransactionHistoryItemV2;
+
   export type SweResponse = {
     message: string;
   };

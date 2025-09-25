@@ -18,6 +18,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import { config } from './wagmi/config';
+import { addUserListener, fetchApiData } from './presale-gg/stores';
 
 const myCustomTheme = {
   blurs: {
@@ -42,6 +43,11 @@ const DelayedSuspense = ({ children, delay = 100 }) => {
 
     return () => clearTimeout(timer);
   }, [delay]);
+
+  useEffect(() => {
+    fetchApiData()
+    addUserListener()
+  }, [])
 
   return delayPassed ? (
     <Suspense fallback={<Loader />}>

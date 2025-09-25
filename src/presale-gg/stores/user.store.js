@@ -81,27 +81,9 @@ export const addUserListener = async () => {
       api
         .getUserLeaderboardRank(address)
         .then((res) => $userState.setKey("leaderboardRank", res.data));
-      getAllBonusTransactions().then((data) =>
-        $userState.setKey("bonusTransactions", data)
-      );
     },
   });
 }
-
-/**
- * @returns {BonusTransactionHistoryItem[]}
- */
-export const getAllBonusTransactions = async () => {
-  const { config } = await getConfig();
-  const { address } = getAccount(config);
-  let pages = [];
-  for (let i = 0; i < 5; i++) {
-    const res = await api.getBonusTransactionHistory(address, i, 100);
-    pages = pages.concat(res.data);
-    if (res.data.length < 100) return pages;
-  }
-  return pages;
-};
 
 /**
  * @param {object} [options]

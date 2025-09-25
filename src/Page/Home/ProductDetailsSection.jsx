@@ -32,7 +32,7 @@ import token7 from "../../assects/icons/wallet_icon/token (3).svg";
 import token8 from "../../assects/icons/wallet_icon/token (2).svg";
 import token9 from "../../assects/icons/wallet_icon/token (1).svg";
 
-import BuyWidget from "../../components/BuyWidget"
+import Widget from "../../components/Widget"
 
 import Parse from 'parse';
 import '@rainbow-me/rainbowkit/styles.css';
@@ -1071,7 +1071,7 @@ const ProductDetailsSection = ({
     </div>
     <div
     >
-      <BuyWidget handleClose={handleClose} />
+      <Widget handleClose={handleClose} />
           </div>
         </div>
       </div>
