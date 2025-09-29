@@ -78,7 +78,7 @@ export default function TokenSelectDropdown({ tokens, onChange }) {
         <div
           className="absolute left-0 max-h-[250px] overflow-y-scroll mt-1 w-full border border-gray-300 rounded-md shadow-md z-10 overflow-hidden"
           style={{
-            background: "#7a7a7aa6",
+            background: "#929292ff",
             backdropFilter: "blur(5px)",
           }}
         >
@@ -86,10 +86,8 @@ export default function TokenSelectDropdown({ tokens, onChange }) {
             <button
               key={token.id}
               onClick={() => handleSelect(token)}
-              className="flex items-center text-[#fff] gap-x-2 w-full px-3 py-2 text-[11.7px] font-[700] font-[Inter] text-left hover:bg-gray-400/80"
-              style={{
-                background: "#7a7a7aa6",
-              }}
+              className="flex items-center text-[#fff] gap-x-2 w-full px-3 py-2 text-[11.7px] font-[700] font-[Inter] text-left hover:bg-[#8a8a8aff] bg-[#929292ff]"
+             
             >
               {token.icon && (
                 <img src={token.icon} alt={token.symbol} className="max-h-[20px]" />
