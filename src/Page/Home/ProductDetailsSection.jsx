@@ -39,43 +39,33 @@ import '@rainbow-me/rainbowkit/styles.css';
 
 import axios from 'axios'
 
-import { bsc } from 'wagmi/chains'
-import { useWriteContract, useAccount, useBalance, useSendTransaction } from 'wagmi'
-import { useReadContract, useWaitForTransactionReceipt } from 'wagmi'
-import { useSwitchChain, useChainId } from 'wagmi'
 import {
   useWriteContract,
-  useAccount,
-  useBalance,
   useSendTransaction,
+  useAccount,
+  useSwitchChain,
+  useChainId,
 } from "wagmi";
-import { useReadContract, useWaitForTransactionReceipt } from "wagmi";
-import { useSwitchChain, useChainId } from "wagmi";
 import { useConnectModal, useChainModal } from "@rainbow-me/rainbowkit";
 
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 import { parseEther } from "viem";
 
 import { useTranslation } from "react-i18next";
 
-import { FaLink, FaTwitter, FaInstagram } from "react-icons/fa";
-import { BsFillSendFill } from "react-icons/bs";
 
 // const stakeAndClaimContract = "0x255b82eC452E00e3E9D2c56441AB133B616704F8";
 // const dreamcarsAddress = "0xa910A46E2F2002Fa9B5aA85F35b9440F6DAC4b10";
 
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation, Mousewheel, Pagination, Keyboard } from "swiper/modules";
+import { Navigation, Pagination, Keyboard } from "swiper/modules";
 
 import cardsvg1 from "../../assects/svgs/cardsvg (1).svg";
 import cardsvg2 from "../../assects/svgs/cardsvg (2).svg";
-import TokenSelectDropdown from "../../components/TokenDropdown";
-import TokenDropdownGrid from "../../components/TokenDropdownGrid";
 
 /**
  * @typedef {import("../../presale-gg/api/api.types").API.PaymentToken} PaymentToken
