@@ -60,7 +60,14 @@ export default function TokenSelectDropdown({ tokens, onChange, variant = 'defau
   return (
     <div {...others} className={clsx("relative", others.className)} ref={dropdownRef}>
       <button
-        onClick={() => setOpen(!open)}
+        onClick={() => {
+          if (tokens.length > 1) {
+            setOpen(!open)
+          } else {
+            onChange(tokens[0])
+          }
+          
+        }}
         className={clsx("flex items-center justify-between w-full px-2 h-[44px] rounded-[8px] cursor-pointer", {"outline-2 outline-[#FFD02F]": selected})}
         style={{ background: "rgba(255, 255, 255, 0.20)", outlineStyle: selected ? "solid" : "none" }}
       >
@@ -84,23 +91,25 @@ export default function TokenSelectDropdown({ tokens, onChange, variant = 'defau
             )}
           </span>
         </span>
-        <svg
-          className={`w-4 h-4 transition-transform text-[#0c2f71] ${open ? "rotate-180" : ""}`}
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-          style={{ color: "#0c2f71" }}
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M19 9l-7 7-7-7"
-          />
-        </svg>
+        {tokens.length > 1 && (
+          <svg
+            className={`w-4 h-4 transition-transform text-[#0c2f71] ${open ? "rotate-180" : ""}`}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            viewBox="0 0 24 24"
+            style={{ color: "#0c2f71" }}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        )}
       </button>
 
-      {open && (
+      {open && tokens.length > 1 && (
         <div
           className="absolute top-full left-0 mt-1 w-full border border-gray-300 rounded-md shadow-md z-10 overflow-y-auto max-h-[250px]"
           style={{

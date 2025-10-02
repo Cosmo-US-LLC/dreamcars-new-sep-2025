@@ -190,7 +190,7 @@ export const createCardTransaction = (args) => {
  * @param {string} address
  * @param {number} page
  * @param {number} [limit=12]
- * @returns {Promise<import("axios").AxiosResponse<import("../api/api.types.d.ts").API.TransactionHistoryItemV2>>}
+ * @returns {Promise<import("axios").AxiosResponse<import("../api/api.types.d.ts").API.TransactionHistoryItemV2[]>>}
  */
 export const getTransactionHistoryV2 = (address, page, limit = 12) => {
   return apiFetch(`${baseUrl.replace("v1", "v2")}/projects/${project}/wallets/${address}/transactions`, {

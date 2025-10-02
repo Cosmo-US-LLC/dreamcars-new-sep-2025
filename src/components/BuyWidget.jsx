@@ -110,7 +110,7 @@ const BuyWidget = ({handleClose, others}) => {
   const [boughtTransactionHash, setBoughtTransactionHash] = useState(null)
   const [boughtPaymentToken, setBoughtPaymentToken] = useState(null)
   const [boughtPaymentAmountStr, setBoughtPaymentAmountStr] = useState(null)
-  const [boughtModalOpen, setBoughtModalOpen] = useState(true)
+  const [boughtModalOpen, setBoughtModalOpen] = useState(false)
 
   const buy = async () => {
     if (apiData.presaleEnded) return toast.error('Presale has ended')
@@ -124,6 +124,7 @@ const BuyWidget = ({handleClose, others}) => {
       setBoughtTransactionHash(null)
       setBoughtPaymentToken(selectedToken)
       setBoughtPaymentAmountStr(paymentAmountStr)
+      setBoughtModalOpen(true)
       setTransactionLoading(true)
       const res = await buyWithCrypto({
         paymentToken: selectedToken,

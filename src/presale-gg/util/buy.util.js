@@ -42,12 +42,12 @@ export const waitForNextTransaction = (
         return clearInterval(checkInterval)
       }
       try {
-        const res = await api.getTransactionHistoryV2(walletAddress, 0, 1)
-        /** @type {import("../api/api.types").API.TransactionHistoryItemV2} */
-        const transaction = res.data[0]
+        const res = await api.getTransactionHistoryV2(walletAddress, 0, 10)
+        /** @type {import("../api/api.types").API.PurchaseTransactionHistoryItemV2} */
+        const transaction = res.data.find((transaction) => transaction.record_type === "transaction")
         if (!transaction) return
         if (new Date(transaction.created_at).getTime() < createdAt) return
-        if (transaction.status === 'completed' && transaction.type === "payment") {
+        if (transaction.status === 'completed') {
           confirm(transaction)
         }
       } catch (_) {}
