@@ -42,12 +42,17 @@ export const defaultUserState = {
 export const $userState = map({ ...defaultUserState });
 export const useUserState = () => useStore($userState);
 
+let lastFetched = null
 export const addUserListener = async () => {
   const { config } = await getConfig();
   watchAccount(config, {
     onChange: (account) => {
       const address = account.address;
-      if (!address) return $userState.set({ ...defaultUserState });
+      if (!address) {
+        $userState.set({ ...defaultUserState });
+        lastFetched = null
+        return
+      }
       // Send the connected event
       if (account.isConnected) {
         try {
@@ -70,6 +75,8 @@ export const addUserListener = async () => {
           console.warn(err);
         }
       }
+      if (lastFetched === account.address.toLowerCase()) return
+      lastFetched = account.address.toLowerCase()
 
       api.getUser(address).then((res) => $userState.setKey("user", res.data));
       api

@@ -16,6 +16,7 @@ import { LAUNCH_PRICE } from "../constants";
 import { BonusCodeInput, ReferralCodeInput } from "./CodeInput";
 import NowpaymentsModal from "./NowPaymentsModal";
 import WalletTransferModal from "./WalletTransferModal";
+import { baseRankData } from "../presale-gg/web3";
 
 /**
  * @typedef {import("../presale-gg/api/api.types").API.PaymentToken} PaymentToken
@@ -46,7 +47,7 @@ const BuyWidget = ({handleClose, others}) => {
     else if (params.has("bonus_code")) setVisibleCode("bonus")
   }, [])
 
-  const partialNumRegexp = /\d*|(\d\.?\d*)?/
+  const partialNumRegexp = /^(\d*|(\d\.?\d*)?)$/
 
   useEffect(() => {
     if (selectedToken !== null || !apiData.paymentTokens?.[0]) return
@@ -55,7 +56,7 @@ const BuyWidget = ({handleClose, others}) => {
 
   useEffect(() => {
     if (!selectedToken) return
-    setReceiveAmountStr(formatPrecision(parseNum(selectedToken.price) * parseNum(paymentAmountStr), 0, 3))
+    setReceiveAmountStr(formatPrecision(parseNum(selectedToken.price) * parseNum(paymentAmountStr) / parseNum(apiData.stage?.token_price ?? 1), 0, 3))
   }, [selectedToken])
 
   /** @param {InputEvent} e */
@@ -66,7 +67,7 @@ const BuyWidget = ({handleClose, others}) => {
     }
     e.currentTarget.value = val
     setPaymentAmountStr(val)
-    setReceiveAmountStr(formatPrecision(parseNum(val) * parseNum(selectedToken?.price) / parseNum(apiData.stage?.token_price || 1), 0, 2))
+    setReceiveAmountStr(formatPrecision(parseNum(val) * parseNum(selectedToken?.price) / parseNum(apiData.stage?.token_price || 1), 0, 3))
   }
 
   /** @param {InputEvent} e */
@@ -156,6 +157,12 @@ const BuyWidget = ({handleClose, others}) => {
   }
 
   const { openConnectModal } = useConnectModal()
+  const nftWillGet = useMemo(() => {
+    for (const [rank, data] of Object.entries(baseRankData).reverse()) {
+      if (payUsd >= data.totalUsdNeeded) return rank
+    }
+    return null
+  }, [payUsd])
 
   return (
     <>
@@ -252,12 +259,7 @@ const BuyWidget = ({handleClose, others}) => {
                     <span className="text-[#FFD02F] font-[800] underline">
                     <a href={"#membership"} className="" >
                       <span className="text-[#FFD02F] font-bold underline">
-                          {payUsd >= 1000 && payUsd < 5000 ? "Mercedes NFT" :
-                              payUsd >= 5000 && payUsd < 10000 ? "Porsche NFT" :
-                                  payUsd >= 10000 && payUsd < 25000 ? "Bentley NFT" :
-                                      payUsd >= 21000 && payUsd < 100000 ? "Ferrari NFT" :
-                                          payUsd >= 100000 ? "Lamborghini NFT" : ""
-                          }
+                          {nftWillGet && `${nftWillGet} NFT`}
                       </span>
                   </a>
                     </span>
@@ -328,8 +330,6 @@ const BuyWidget = ({handleClose, others}) => {
                                             <button
                                                 className="bgcolor font-[700] font-[Lato] w-[100%] h-[42px] rounded-[5px] text-[16px]"
                                                 type="button" onClick={() => {
-                                                  console.log("CLICKED")
-                                                  console.log(account)
                                                   if (account.isConnected) buy()
                                                 }}>
                                                 {apiData.presaleEnded ? "Presale Ended" : "BUY $DCARS"}

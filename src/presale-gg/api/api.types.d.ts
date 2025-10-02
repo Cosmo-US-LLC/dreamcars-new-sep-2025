@@ -68,7 +68,7 @@ export namespace API {
     payment_token_name: string | null;
     payment_usd_amount: string;
     project_id: string;
-    record_type: "purchase_transaction";
+    record_type: "transaction";
     stage_name: string | null;
     status: API.TransactionHistoryItem["status"] | null;
     tokens_bought: string | null;

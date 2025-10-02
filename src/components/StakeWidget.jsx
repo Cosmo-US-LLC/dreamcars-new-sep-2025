@@ -109,13 +109,13 @@ export const StakeWidget = () => {
           className="bgcolor font-[700] font-[Lato] w-[100%] h-[42px] rounded-[5px] text-[16px] text-[#000]"
           onClick={stake}
         >
-          Stake
+          {stakeLoading ? "Staking..." : "Stake"}
         </button>
         <button
           className="bgcolor font-[700] font-[Lato] w-[100%] h-[42px] rounded-[5px] text-[16px] text-[#000]"
           onClick={unstake}
         >
-          Unstake
+          {unstakeLoading ? "Unstaking..." : "Unstake"}
         </button>
       </div>
     </div>

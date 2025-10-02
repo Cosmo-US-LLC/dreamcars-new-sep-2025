@@ -59,6 +59,7 @@
 .input {
   flex: 1;
   padding-left: 0.25rem;
+  background-color: transparent !important;
 }
 
 .info-value {

@@ -15,6 +15,7 @@ import clsx from "clsx";
 import { StakeWidget } from "./StakeWidget";
 import { useAccount } from "wagmi";
 import TransactionHistoryWidget from "./TransactionHistoryWidget";
+import presaleGgLogo from "../assects/images/presale-gg.svg"
 
 const Widget = ({ handleClose }) => {
   const { t } = useTranslation()
@@ -51,8 +52,8 @@ const Widget = ({ handleClose }) => {
   const apiData = useApiState()
   const accountData = useAccount()
   const tabs = ["buy", "stake", "transaction_history"]
-  const [selectedTab, setSelectedTab] = useState("transaction_history")
-  const disabledTabs = useMemo(() => accountData.isConnected ? [] : ['stake', 'transaction_history'])
+  const [selectedTab, setSelectedTab] = useState("buy")
+  const disabledTabs = useMemo(() => accountData.isConnected ? [] : ['stake', 'transaction_history'], [accountData.isConnected])
 
   useEffect(() => {
     if (selectedTab === "buy") return
@@ -92,6 +93,11 @@ const Widget = ({ handleClose }) => {
                 {selectedTab === "buy" && <BuyWidget handleClose={handleClose} />}
                 {selectedTab === "stake" && <StakeWidget />}
                 {selectedTab === "transaction_history" && <TransactionHistoryWidget />}
+                {/* eslint-disable-next-line react/jsx-no-target-blank */}
+                <a href="https://presale.gg" target="_blank" className="text-[#fff] flex items-center gap-2 justify-center">
+                  Powered by
+                  <img src={presaleGgLogo} alt="Presale.gg" className="h-5 w-auto" />
+                </a>
               </div>
              </div>
             <div className="max-w-[894px] mt-[25px] mx-auto w-[100%] flex items-center py-[0px] xs:!pt-[0px] justify-between space-x-[1rem]">

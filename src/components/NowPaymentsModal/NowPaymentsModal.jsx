@@ -28,7 +28,6 @@ const NowpaymentsModal = ({ transaction, ...others }) => {
   const [createdAt, setCreatedAt] = useState(Date.now() - 1000)
 
   const timeStr = useMemo(() => {
-    console.log("EXPIRES IN ", expiresInMs / 1000)
     const mins = Math.floor(expiresInMs / (60 * 1000))
     const secs = Math.floor((expiresInMs - mins * 60 * 1000) / 1000)
     return `${zeroPad(Math.floor(mins), 2)}:${zeroPad(Math.floor(secs), 2)}`

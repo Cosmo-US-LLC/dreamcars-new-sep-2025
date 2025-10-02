@@ -2,7 +2,7 @@ import React from "react"
 
 
 
-const Button = ({ text, link, wallet, onClick, target, classes, imageClass, }) => {
+const Button = ({ text, link, wallet, onClick, target, classes, imageClass, disabled }) => {
     return (
         <div className="w-[100%]" >
             {
@@ -21,7 +21,7 @@ const Button = ({ text, link, wallet, onClick, target, classes, imageClass, }) =
                         </button>
                     </a> :
 
-                    <button onClick={onClick} type="button" className={`flex justify-center items-center border border-[#FFD02F] hover:border hover:border-[#FFD02F] hover:text-[#fff] hover:bg-[transparent] ${classes}`}>
+                    <button onClick={onClick} disabled={disabled} type="button" className={`flex justify-center items-center border border-[#FFD02F] hover:border hover:border-[#FFD02F] hover:text-[#fff] hover:bg-[transparent] ${classes}`}>
                         {wallet &&
                             <img className={imageClass} src={wallet} alt="" />
                         }

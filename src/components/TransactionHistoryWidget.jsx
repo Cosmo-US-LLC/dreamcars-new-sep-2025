@@ -4,6 +4,7 @@ import Spinner from "./Spinner"
 import { capitalize, formatLargeNumber, parseNum } from "../presale-gg/util"
 import { tokenNameMap } from "../presale-gg/assets/img/tokens"
 import logoImg from "../assects/images/dtokens.png"
+import { api } from "../presale-gg/api"
 
 /**
  * @typedef {import("../presale-gg/api/api.types").API.TransactionHistoryItemV2} TransactionHistoryItemV2 
@@ -17,43 +18,7 @@ const TransactionHistoryWidget = () => {
 
   const fetchData = async () => {
     setLoading(true)
-    // const res = await api.getTransactionHistoryV2(accountData.address, 0, 100)
-    /** @type {import("../presale-gg/api/api.types.d.ts").API.PurchaseTransactionHistoryItemV2} */
-    const purchaseTransaction = {
-      id: 1,
-      created_at: new Date().toISOString(),
-      payment_token_amount: "1212.123312",
-      payment_token_name: "Ethereum",
-      payment_usd_amount: "521.12",
-      stage_name: "Stage 1",
-      status: "completed",
-      tokens_bought: "91341.12",
-      record_type: 'purchase_transaction'
-    }
-    /** @type {import("../presale-gg/api/api.types.d.ts").API.ManualTransactionHistoryItemV2} */
-    const manualTransaction = {
-      id: 2,
-      created_at: new Date().toISOString(),
-      reason: 'Some reason for it',
-      tokens_bought: "91341.12",
-      record_type: 'manual_transaction'
-    }
-    /** @type {import("../presale-gg/api/api.types.d.ts").API.BonusTransactionHistoryItemV2} */
-    const bonusTransaction = {
-      id: 3,
-      created_at: new Date().toISOString(),
-      bonus_type: "referral",
-      bonus_token_amount: "123.123123",
-      record_type: 'bonus_transaction'
-    }
-    const res = {
-      data: [
-        /**  */
-        purchaseTransaction,
-        manualTransaction,
-        bonusTransaction
-      ]
-    }
+    const res = await api.getTransactionHistoryV2(accountData.address, 0, 100)
     setTransactions(res.data)
     setLoading(false)
   }
@@ -78,7 +43,7 @@ const TransactionHistoryWidget = () => {
   return (
     <div className="!bg-[#3F3F3F] max-w-[733px] w-[100%] mx-auto text-[#fff] rounded-[10px] p-[50px] xs:p-[15px] sm:p-14 md:p-10 flex flex-col gap-4">
       <p className="text-center text-[1.25rem] font-bold">Transaction History</p>
-      <div className="flex flex-col h-[30rem] overflow-y-auto max-w-[25rem] mx-auto w-full gap-4 <xs:gap-2">
+      <div style={{colorScheme: 'dark'}} className="flex flex-col h-[30rem] overflow-y-auto max-w-[25rem] mx-auto w-full gap-4 <xs:gap-2 pr-2 -m4-2">
         {loading ? (
           <Spinner size={10} className="m-auto" />
         ) : (
@@ -97,9 +62,9 @@ const TransactionHistoryWidget = () => {
               </div>
               <div className="flex">
                 <div className="flex-[2] w-0 flex items-center gap-1">
-                  <img className="w-6 h-6" src={trx.record_type === "purchase_transaction" ? tokenNameMap[trx.payment_token_name.toLowerCase()] : logoImg} />
+                  <img className="w-6 h-6" src={trx.record_type === "transaction" ? tokenNameMap[trx.payment_token_name.toLowerCase()] : logoImg} />
                   <div className="flex flex-col">
-                    {trx.record_type === "purchase_transaction" && <>
+                    {trx.record_type === "transaction" && <>
                         <p className="font-bold leading-[1.2]">{formatLargeNumber(trx.payment_token_amount)} {trx.payment_token_name.toUpperCase()}</p>
                       {trx.tokens_bought !== null ? (
                         <p className="text-[#aaa] leading-[1.2] text-[11px]">{formatLargeNumber(parseNum(trx.tokens_bought))} $DCARS for ${formatLargeNumber(parseNum(trx.payment_usd_amount))}</p>
@@ -108,10 +73,10 @@ const TransactionHistoryWidget = () => {
                       )}
                     </>}
                     {trx.record_type === "manual_transaction" && (
-                      <p className="font-bold leading-[1.2]">{formatLargeNumber(trx.tokens_bought)} DCARS</p>
+                      <p className="font-bold leading-[1.2]">+{formatLargeNumber(trx.tokens_bought)} DCARS</p>
                     )}
                     {trx.record_type === "bonus_transaction" && (
-                      <p className="font-bold leading-[1.2]">{formatLargeNumber(trx.bonus_token_amount)} DCARS</p>
+                      <p className="font-bold leading-[1.2]">+{formatLargeNumber(trx.bonus_token_amount)} DCARS</p>
                     )}
                   </div>
                 </div>

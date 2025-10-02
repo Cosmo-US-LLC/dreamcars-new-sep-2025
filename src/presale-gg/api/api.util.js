@@ -5,6 +5,7 @@ const project = "dreamcars";
 
 /**
  * @typedef {import("./api.types.d.ts").API} API
+ * @typedef {import("./api.types.d.ts").API.UserRankData} UserRankData
  * @typedef {import("axios").AxiosResponse} AxiosResponse
  */
 
@@ -192,7 +193,7 @@ export const createCardTransaction = (args) => {
  * @returns {Promise<import("axios").AxiosResponse<import("../api/api.types.d.ts").API.TransactionHistoryItemV2>>}
  */
 export const getTransactionHistoryV2 = (address, page, limit = 12) => {
-  return apiFetch(`${baseUrl.replace("v1", "v2")}/projects/${project}/wallet/${address}/transactions`, {
+  return apiFetch(`${baseUrl.replace("v1", "v2")}/projects/${project}/wallets/${address}/transactions`, {
     params: {
       page,
       limit,
