@@ -17,6 +17,7 @@ import { BonusCodeInput, ReferralCodeInput } from "./CodeInput";
 import NowpaymentsModal from "./NowPaymentsModal";
 import WalletTransferModal from "./WalletTransferModal";
 import { baseRankData } from "../presale-gg/web3";
+import ContactModal from "./ContactModal";
 
 /**
  * @typedef {import("../presale-gg/api/api.types").API.PaymentToken} PaymentToken
@@ -111,6 +112,7 @@ const BuyWidget = ({handleClose, others}) => {
   const [boughtPaymentToken, setBoughtPaymentToken] = useState(null)
   const [boughtPaymentAmountStr, setBoughtPaymentAmountStr] = useState(null)
   const [boughtModalOpen, setBoughtModalOpen] = useState(false)
+  const [contactModalOpen, setContactModalOpen] = useState(false)
 
   const buy = async () => {
     if (apiData.presaleEnded) return toast.error('Presale has ended')
@@ -430,14 +432,20 @@ const BuyWidget = ({handleClose, others}) => {
       {createdTransaction && (
         <NowpaymentsModal
           open={transactionModalOpen}
-          onClose={() => setTransactionModalOpen(false)}
+          onClose={() => {
+            setTransactionModalOpen(false)
+            setContactModalOpen(true)
+          }}
           transaction={createdTransaction}
         />
       )}
       {boughtPaymentAmountStr !== null && boughtPaymentToken !== null && buyState !== null && (
         <WalletTransferModal
           open={boughtModalOpen}
-          onClose={() => setBoughtModalOpen(false)}
+          onClose={() => {
+            setBoughtModalOpen(false)
+            setContactModalOpen(true)
+          }}
           payCurrency={boughtPaymentToken}
           payAmount={boughtPaymentAmountStr}
           state={buyState}
@@ -445,6 +453,7 @@ const BuyWidget = ({handleClose, others}) => {
           transaction={boughtTransaction}
         />
       )}
+      <ContactModal open={contactModalOpen} onClose={() => setContactModalOpen(false)} />
     </>
   )
 }

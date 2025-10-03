@@ -4,12 +4,12 @@ import { ReactComponent as CloseIcon } from '../../assects/icons/close.svg'
 import { createPortal } from 'react-dom'
 
 /**
- * @typedef {object} BaseModalPros
+ * @typedef {object} BaseModalProps
  * @property {boolean} BaseModalProps.open
  * @property {() => void} BaseModalProps.onClose
  * @property {title} [BaseModalProps.title]
  * 
- * @typedef {import("react/jsx-runtime").JSX.HTMLAttributes<HTMLDivElement> & BaseModalProps} ModalProps
+ * @typedef {Omit<import("react").HTMLAttributes<HTMLDivElement>, keyof BaseModalProps> & BaseModalProps} ModalProps
  */
 
 /** @param {ModalProps} props */
