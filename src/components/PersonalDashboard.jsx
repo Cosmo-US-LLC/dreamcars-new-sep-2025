@@ -231,7 +231,7 @@ function PersonalDashboard({ accounts, handleClose }) {
         <Button
           disabled={!canRankUp}
           onClick={rankUp}
-          classes={`${!canRankUp ? "bg-gray-500 hover:bg-gray-500 hover:text-[#000] cursor-not-allowed" : "bgcolor"} relative z-[1] rounded-full w-[100%] h-[45px]  sm:h-[30px]  xs:h-[30px] text-[16px] sm:text-[13px]  xs:text-[13px] font-[700]  m-auto `}
+          classes={`${!canRankUp ? "bg-gray-500 hover:bg-gray-500 hover:!text-[#000] cursor-not-allowed" : "bgcolor"} relative z-[1] rounded-full w-[100%] h-[45px]  sm:h-[30px]  xs:h-[30px] text-[16px] sm:text-[13px]  xs:text-[13px] font-[700]  m-auto `}
           text={loading ? "Claiming Next NFT..." : "Claim Next NFT"}
         />{" "}
         {/* { rankData.current_rank && <Button
